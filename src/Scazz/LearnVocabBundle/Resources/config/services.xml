@@ -4,17 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="scazz_learn_vocab.example.class">Scazz\LearnVocabBundle\Example</parameter>
+        <parameter key="learnvocab.subject.handler.class">Scazz\LearnVocabBundle\Handler\SubjectHandler</parameter>
+        <parameter key="learnvocab.subject.class">Scazz\LearnVocabBundle\Entity\Subject</parameter>
     </parameters>
 
     <services>
-        <service id="scazz_learn_vocab.example" class="%scazz_learn_vocab.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="learnvocab.subject.handler" class="%learnvocab.subject.handler.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%learnvocab.subject.class%</argument>
         </service>
     </services>
-    -->
 </container>

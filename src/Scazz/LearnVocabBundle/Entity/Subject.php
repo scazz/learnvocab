@@ -29,9 +29,9 @@ class Subject
     private $title;
 
     /**
-     * @var boolean"
+     * @var boolean
      *
-     * @ORM\Column(name="isTemplate", type="boolean"")
+     * @ORM\Column(name="isTemplate", type="boolean")
      */
     private $isTemplate;
 
@@ -73,10 +73,10 @@ class Subject
     /**
      * Set isTemplate
      *
-     * @param \boolean $isTemplate
+     * @param boolean $isTemplate
      * @return Subject
      */
-    public function setIsTemplate(\boolean $isTemplate)
+    public function setIsTemplate($isTemplate)
     {
         $this->isTemplate = $isTemplate;
 

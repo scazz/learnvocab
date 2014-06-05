@@ -1,0 +1,5 @@
+learnvocab_api:
+    type:     rest
+    prefix:   /
+    resource: "@ScazzLearnVocabBundle/Resources/config/routes.yml"
+

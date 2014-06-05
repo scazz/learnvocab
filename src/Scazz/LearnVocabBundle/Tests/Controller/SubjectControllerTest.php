@@ -13,10 +13,12 @@ class SubjectControllerTest extends WebTestCase {
 
     public function testJsonGetSubjectsAction() {
         $this->setUpTest();
-        //$fixtures = array( 'Scazz\LearnVocabBundle\Tests\Fixtures\Entity\LoadBundleData');
-        //$this->loadFixtures( $fixtures );
+        $fixtures = array( 'Scazz\LearnVocabBundle\Tests\Fixtures\Entity\LoadBundleData');
+        $this->loadFixtures( $fixtures );
+		$subject = array_pop( LoadBundleData::$subjects );
 
-        $route =  $this->getUrl('api_1_get_subjects', array('_format' => 'json'));
+
+        $route =  $this->getUrl('api_1_get_subject', array('id'=>$subject->getId(), '_format' => 'json'));
         $this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
         $response = $this->client->getResponse();
         $this->assertJsonResponse( $response );

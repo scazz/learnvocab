@@ -1,0 +1,5 @@
+learnvocab_api_Subject:
+     type:     rest
+     prefix:   /api/v1
+     resource: "Scazz\\LearnVocabBundle\Controller\SubjectController"
+     name_prefix:  api_1_

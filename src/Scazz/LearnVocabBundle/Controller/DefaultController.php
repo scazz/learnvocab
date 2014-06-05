@@ -8,11 +8,5 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
-    /**
-     * @param $id
-     * @return array
-     */
-    public function getSubjectAction($id) {
 
-    }
 }

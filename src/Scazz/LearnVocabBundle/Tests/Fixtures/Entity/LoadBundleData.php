@@ -13,8 +13,13 @@ class LoadBundleData implements FixtureInterface {
     static public $subjects = array();
 
     public function load(ObjectManager $objectManager) {
+		$subject = new Subject();
+		$subject->setTitle("German");
+		$subject->setIsTemplate(false);
 
-
+		$objectManager->persist($subject);
+		$objectManager->flush();
+		self::$subjects[] = $subject;
     }
 
 }
