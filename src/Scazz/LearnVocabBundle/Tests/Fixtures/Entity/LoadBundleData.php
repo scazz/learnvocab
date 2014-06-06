@@ -20,7 +20,7 @@ class LoadBundleData implements FixtureInterface {
 		$this->om = $objectManager;
 
 		$this->loadSubjects();
-		$this->loadTopics();
+		//$this->loadTopics();
     }
 
 	private function loadSubjects() {
@@ -28,15 +28,26 @@ class LoadBundleData implements FixtureInterface {
 		$subject->setName("German");
 		$subject->setIsTemplate(false);
 
-		$this->om->persist($subject);
-		$this->om->flush();
-		self::$subjects[] = $subject;
-	}
-
-	private function loadTopics() {
 		$topic = new Topic();
 		$topic->setName("Animals");
 		$topic->setIsTemplate(false);
+		$topic->setSubject( $subject );
+
+		$this->om->persist($subject);
+		$this->om->persist($topic);
+		$this->om->flush();
+		self::$subjects[] = $subject;
+		self::$topics[] = $topic;
+	}
+
+	private function loadTopics() {
+		$subject = self::$subjects[0];
+
+		$topic = new Topic();
+		$topic->setName("Animals");
+		$topic->setIsTemplate(false);
+		$topic->setSubject( $subject );
+		//$this->om->persist($subject);
 
 		$this->om->persist($topic);
 		$this->om->flush();

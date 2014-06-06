@@ -33,10 +33,13 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ ScazzLearnVocabBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
+        handlebars:
+          apply_to: "\.hb$"
+          bin: C:\Users\Mum\AppData\Roaming\npm\node_modules\ember-handlebars\bin\handlebars
         #closure:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:

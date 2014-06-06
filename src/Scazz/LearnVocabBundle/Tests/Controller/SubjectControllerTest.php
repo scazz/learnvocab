@@ -47,6 +47,19 @@ class SubjectControllerTest extends WebTestCase {
 		$this->assertObjectHasAttribute( 'id', $content->subjects[0] );
 	}
 
+	public function testJsonGetSubjectShouldIncludeTopicId() {
+		$this->setUpTest();
+		$this->fixtures();
+		$subject = array_pop( LoadBundleData::$subjects );
+		$topic = array_pop ( LoadBundleData::$topics );
+
+		$route =  $this->getUrl('api_1_get_subject', array('id'=>$subject->getId(), '_format' => 'json'));
+		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
+		$response = $this->client->getResponse();
+		$content = json_decode( $response->getContent() );
+		$this->assertTrue( in_array( $topic->getId(), $content->subject->topics));
+	}
+
     private function setUpTest() {
         $this->client = static::createClient();
     }

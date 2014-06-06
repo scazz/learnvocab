@@ -35,8 +35,15 @@ class Topic
      */
     private $isTemplate;
 
+	/**
+	 * @ORM\ManyToOne(targetEntity="Subject", inversedBy="topics")
+	 * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
+	 */
+	private $subject;
 
-    /**
+
+
+	/**
      * Get id
      *
      * @return integer 
@@ -46,7 +53,17 @@ class Topic
         return $this->id;
     }
 
-    /**
+	/**
+	 * Set subject
+	 *
+	 */
+	public function setSubject( Subject $subject ) {
+		$this->subject = $subject;
+
+		return $this;
+	}
+
+	/**
      * Set name
      *
      * @param string $name

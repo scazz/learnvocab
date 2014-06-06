@@ -13,20 +13,16 @@ class SubjectController extends FOSRestController {
 
 
 	public function getSubjectAction( $id ) {
-		$view = View::create();
 		$data = $this->getOr404($id);
-		$view->setData( array( 'subject' => $data ));
-		return $view;
+		return array( 'subject' => $data );
 	}
 
 	public function getSubjectsAction() {
-		$view = View::create();
 		$data = $this
 			->container
 			->get('learnvocab.subject.handler')
 			->getAll();
-		$view->setData( array( 'subjects' => $data ));
-		return $view;
+		return array( 'subjects' => $data );
 	}
 
 	/**

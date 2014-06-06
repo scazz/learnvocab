@@ -70918,4 +70918,3 @@ App.Vocab = DS.Model.extend({
 	isLearnt: DS.attr('boolean'),
 	timesCorrectlyAnswered: DS.attr()
 });
-//# sourceMappingURL=app.js.map
