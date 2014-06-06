@@ -24,9 +24,9 @@ class Subject
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $title;
+    private $name;
 
     /**
      * @var boolean
@@ -48,26 +48,26 @@ class Subject
     }
 
     /**
-     * Set "title
+     * Set name
      *
-     * @param string $title
+     * @param string $name
      * @return Subject
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get "title
+     * Get name
      *
      * @return string 
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->Title;
+        return $this->name;
     }
 
     /**

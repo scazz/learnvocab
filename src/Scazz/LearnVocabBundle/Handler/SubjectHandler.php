@@ -2,6 +2,8 @@
 
 namespace Scazz\LearnVocabBundle\Handler;
 
+use Doctrine\Common\Persistence\ObjectManager;
+
 class SubjectHandler {
 
 	public function __construct(ObjectManager $om, $entityClass) {
@@ -13,5 +15,9 @@ class SubjectHandler {
 	public function get($id)
 	{
 		return $this->repository->find($id);
+	}
+
+	public function getAll() {
+		return $this->repository->findAll();
 	}
 }

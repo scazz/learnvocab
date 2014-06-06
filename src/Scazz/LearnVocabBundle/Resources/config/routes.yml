@@ -1,5 +1,11 @@
 learnvocab_api_Subject:
      type:     rest
      prefix:   /api/v1
+     defaults: {_format: json}
      resource: "Scazz\\LearnVocabBundle\Controller\SubjectController"
      name_prefix:  api_1_
+
+_demo:
+    resource:  "Scazz\\LearnVocabBundle\Controller\SiteController"
+    type:     annotation
+    prefix:   /

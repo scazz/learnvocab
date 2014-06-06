@@ -1,0 +1,1 @@
+{{dialog-window cancel="cancelDelete" confirm="delete"}}
