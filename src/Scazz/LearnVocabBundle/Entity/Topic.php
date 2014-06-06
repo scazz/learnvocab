@@ -3,12 +3,18 @@
 namespace Scazz\LearnVocabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Topic
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Scazz\LearnVocabBundle\Entity\TopicRepository")
+ *
+ * @ExclusionPolicy("all")
  */
 class Topic
 {
@@ -18,6 +24,8 @@ class Topic
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 *
+	 * @Expose
      */
     private $id;
 
@@ -25,6 +33,7 @@ class Topic
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+	 * @Expose
      */
     private $name;
 
@@ -32,6 +41,7 @@ class Topic
      * @var boolean
      *
      * @ORM\Column(name="isTemplate", type="boolean")
+	 * @Expose
      */
     private $isTemplate;
 
@@ -40,6 +50,11 @@ class Topic
 	 * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
 	 */
 	private $subject;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Vocab", mappedBy="topic")
+	 */
+	private $vocabs;
 
 
 
@@ -108,4 +123,24 @@ class Topic
     {
         return $this->isTemplate;
     }
+
+	public function getVocabs() {
+		return $this->vocabs;
+	}
+
+	/**
+	 * Get array containing associated vocab IDs
+	 *
+	 *@return array
+	 *
+	 * @VirtualProperty
+	 * @SerializedName("vocabs")
+	 */
+	public function getVocabIDs() {
+		$ids = array();
+		foreach($this->getVocabs() as $vocab) {
+			$ids[] = $vocab->getId();
+		}
+		return $ids;
+	}
 }

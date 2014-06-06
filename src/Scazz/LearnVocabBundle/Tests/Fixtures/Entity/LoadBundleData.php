@@ -8,6 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 use Scazz\LearnVocabBundle\Entity\Subject;
 use Scazz\LearnVocabBundle\Entity\Topic;
+use Scazz\LearnVocabBundle\Entity\Vocab;
 
 class LoadBundleData implements FixtureInterface {
 
@@ -15,15 +16,11 @@ class LoadBundleData implements FixtureInterface {
 
     static public $subjects = array();
     static public $topics = array();
+    static public $vocabs = array();
 
     public function load(ObjectManager $objectManager) {
 		$this->om = $objectManager;
 
-		$this->loadSubjects();
-		//$this->loadTopics();
-    }
-
-	private function loadSubjects() {
 		$subject = new Subject();
 		$subject->setName("German");
 		$subject->setIsTemplate(false);
@@ -33,25 +30,17 @@ class LoadBundleData implements FixtureInterface {
 		$topic->setIsTemplate(false);
 		$topic->setSubject( $subject );
 
+		$vocab = new Vocab();
+		$vocab->setNative("cat");
+		$vocab->setTranslated("Katz");
+		$vocab->setTopic( $topic );
+
 		$this->om->persist($subject);
 		$this->om->persist($topic);
+		$this->om->persist($vocab);
 		$this->om->flush();
 		self::$subjects[] = $subject;
 		self::$topics[] = $topic;
-	}
-
-	private function loadTopics() {
-		$subject = self::$subjects[0];
-
-		$topic = new Topic();
-		$topic->setName("Animals");
-		$topic->setIsTemplate(false);
-		$topic->setSubject( $subject );
-		//$this->om->persist($subject);
-
-		$this->om->persist($topic);
-		$this->om->flush();
-		self::$topics[] = $topic;
-	}
-
+		self::$vocabs[] = $vocab;
+    }
 }

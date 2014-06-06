@@ -13,11 +13,20 @@ class TopicControllerTest extends WebTestCase {
 		$this->setUpTest();
 		$this->fixtures();
 		$topic = array_pop( LoadBundleData::$topics );
+		$vocab = array_pop( LoadBundleData::$vocabs );
 
 		$route =  $this->getUrl('api_1_get_topic', array('id'=>$topic->getId(), '_format' => 'json'));
 		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
 		$response = $this->client->getResponse();
 		$this->assertJsonResponse( $response );
+		$content = json_decode($response->getContent());
+		$this->assertObjectNotHasAttribute( 'subject', $content->topic );
+
+		/*
+		 * Ensure vocabs come as a list of IDs, not embedded into response
+		 */
+		$this->assertObjectHasAttribute( 'vocabs', $content->topic );
+		$this->assertTrue( in_array( $vocab->getId(), $content->topic->vocabs ));
 	}
 
 	public function testGetTopicThrows404OnError() {
@@ -32,7 +41,6 @@ class TopicControllerTest extends WebTestCase {
 	public function testJsonGetTopicsAction() {
 		$this->setUpTest();
 		$this->fixtures();
-		$topic = array_pop( LoadBundleData::$topics );
 
 		$route =  $this->getUrl('api_1_get_topics', array('_format' => 'json'));
 		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
@@ -44,6 +52,8 @@ class TopicControllerTest extends WebTestCase {
 		$this->assertArrayHasKey(0, $content->topics);
 		$this->assertObjectHasAttribute( 'id', $content->topics[0] );
 	}
+
+
 
 	private function setUpTest() {
 		$this->client = static::createClient();
