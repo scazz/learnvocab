@@ -7,12 +7,18 @@
     <parameters>
         <parameter key="learnvocab.subject.handler.class">Scazz\LearnVocabBundle\Handler\SubjectHandler</parameter>
         <parameter key="learnvocab.subject.class">Scazz\LearnVocabBundle\Entity\Subject</parameter>
+        <parameter key="learnvocab.topic.handler.class">Scazz\LearnVocabBundle\Handler\TopicHandler</parameter>
+        <parameter key="learnvocab.topic.class">Scazz\LearnVocabBundle\Entity\Topic</parameter>
     </parameters>
 
     <services>
         <service id="learnvocab.subject.handler" class="%learnvocab.subject.handler.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%learnvocab.subject.class%</argument>
+        </service>
+        <service id="learnvocab.topic.handler" class="%learnvocab.topic.handler.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%learnvocab.topic.class%</argument>
         </service>
     </services>
 </container>

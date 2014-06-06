@@ -6,7 +6,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase as WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Client;
 
-use Scazz\LEarnVocabBundle\Tests\Fixtures\Entity\LoadBundleData;
+use Scazz\LearnVocabBundle\Tests\Fixtures\Entity\LoadBundleData;
 
 class SubjectControllerTest extends WebTestCase {
     private $client;

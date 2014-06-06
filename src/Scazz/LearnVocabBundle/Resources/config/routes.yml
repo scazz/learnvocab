@@ -5,6 +5,13 @@ learnvocab_api_Subject:
      resource: "Scazz\\LearnVocabBundle\Controller\SubjectController"
      name_prefix:  api_1_
 
+learnvocab_api_Topic:
+     type:     rest
+     prefix:   /api/v1
+     defaults: {_format: json}
+     resource: "Scazz\\LearnVocabBundle\Controller\TopicController"
+     name_prefix:  api_1_
+
 _demo:
     resource:  "Scazz\\LearnVocabBundle\Controller\SiteController"
     type:     annotation
