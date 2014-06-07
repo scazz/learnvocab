@@ -13,12 +13,14 @@ use Scazz\LearnVocabBundle\Exception\InvalidFormException;
 class SubjectHandler {
 
 	private $formFactory;
+	private $topicHandler;
 
-	public function __construct(ObjectManager $om, $entityClass, FormFactoryInterface $formFactory) {
+	public function __construct(ObjectManager $om, $entityClass, FormFactoryInterface $formFactory, $topicHandler) {
 		$this->om = $om;
 		$this->entityClass = $entityClass;
 		$this->repository = $this->om->getRepository($this->entityClass);
 		$this->formFactory = $formFactory;
+		$this->topicHandler = $topicHandler;
 	}
 
 	public function get($id)
@@ -40,10 +42,29 @@ class SubjectHandler {
 		return $this->processForm($subject, $request->request->all()['subject'], 'POST');
 	}
 
+	public function put(Subject $subject, $request) {
+		return $this->processForm($subject, $request->request->all()['subject'], 'POST');
+	}
+
 	private function processForm(Subject $subject, array $parameters, $method='PUT') {
 		$form = $this->formFactory->create(new SubjectTypeAPI(), $subject, array('method'=>$method));
 
+		$topicIds = array();
+		foreach( $parameters['topics'] as $topic_id) {
+			$topicIds[] = $topic_id;
+			echo "topic: $topic_id";
+		}
+		unset($parameters['topics']);
+
 		$form->submit($parameters);
+
+		//$subject->setTopics(array());
+		foreach( $topicIds as $topic_id ) {
+			$topic = $this->topicHandler->get($topic_id);
+			if ($topic) {
+				$subject->addTopics($topic);
+			}
+		}
 
 		if ( $form->isValid()) {
 			$this->om->persist($subject);

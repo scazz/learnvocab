@@ -5,6 +5,7 @@ namespace Scazz\LearnVocabBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Scazz\LearnVocabBundle\Entity\Topic;
 
 class SubjectType extends AbstractType
 {
@@ -18,7 +19,7 @@ class SubjectType extends AbstractType
             ->add('name')
 			->add('isTemplate')
 			->add('topics')
-        ;
+        	;
     }
     
     /**

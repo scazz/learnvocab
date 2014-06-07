@@ -99,4 +99,19 @@ class SubjectControllerTest extends ControllerTestHelper {
 		$response = $this->client->getResponse();
 		$this->assertJsonResponse($response, 400, false );
 	}
+
+	public function testPutSubjectAction() {
+		$this->setUpTest();
+		$this->fixtures();
+		$subject = LoadBundleData::$subjects[0];
+
+		$serializedSubject = '{"subject":{"name":"newName","isTemplate":false,"topics":[]}}';
+		$route = $this->getUrl('api_1_put_subject', array('id'=>$subject->getId(),'_format'=>'json'));
+		$this->client->request('PUT', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedSubject );
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 201, false );
+		$returnedSubject = json_decode($response->getContent());
+
+		$this->assertNotEquals($subject->getName(), $returnedSubject->subject->name );
+	}
 }

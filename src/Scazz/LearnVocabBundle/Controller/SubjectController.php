@@ -39,11 +39,20 @@ class SubjectController extends FOSRestController {
 
 	public function postSubjectAction(Request $request) {
 		try {
-			$newSubject = $this
-				->container
-				->get('learnvocab.subject.handler')
-				->post( $request );
+			$newSubject = $this->container->get('learnvocab.subject.handler')->post( $request );
+		} catch(InvalidFormException $exception) {
+			return $exception->getForm();
+		}
+		$response = $this->forward('ScazzLearnVocabBundle:Subject:getSubject', array('id' => $newSubject->getId()), array('_format'=>'json' ));
+		$response->setStatusCode("201");
+		return $response;
+	}
 
+	public function putSubjectAction(Request $request, $id) {
+		$subject = $this->getOr404($id);
+
+		try {
+			$newSubject = $this->container->get('learnvocab.subject.handler')->put( $subject, $request );
 		} catch(InvalidFormException $exception) {
 			return $exception->getForm();
 		}

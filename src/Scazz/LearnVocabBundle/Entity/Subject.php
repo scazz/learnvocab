@@ -68,11 +68,36 @@ class Subject
         return $this->id;
     }
 
+	/*
+	 *
+	 */
+
 	/**
 	 * Get topics
 	 */
 	public function getTopics() {
 		return $this->topics;
+	}
+
+	public function addTopics(Topic $topic)
+	{
+		$this->topics[] = $topic;
+		$topic->setSubject($this);
+		return $this;
+	}
+
+	public function setTopics(ArrayCollection $topics){
+
+		// unset all associated topics!
+		foreach ($this->topics as $topic) {
+			$topic->setSubject(null);
+		}
+
+		$this->topics = $topics;
+		foreach ($topics as $topic){
+			$topic->setSubject($this);
+		}
+		return $this;
 	}
 
 	/**

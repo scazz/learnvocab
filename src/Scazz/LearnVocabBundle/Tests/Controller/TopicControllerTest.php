@@ -74,6 +74,7 @@ class TopicControllerTest extends ControllerTestHelper {
 	public function testPostTopicAction() {
 		$this->setUpTest();
 		$this->fixtures();
+		$subject = LoadBundleData::$subjects[0];
 
 		$serializedTopic = '{"topic":{"name":"test","isTemplate":false,"vocabs":[]}}';
 		$route = $this->getUrl('api_1_post_topic', array('_format'=>'json'));
