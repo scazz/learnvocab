@@ -58,7 +58,9 @@ class Topic
 	 */
 	private $vocabs;
 
-
+	public function __construct() {
+		$this->vocabs = array();
+	}
 
 	/**
      * Get id
@@ -135,7 +137,21 @@ class Topic
 	}
 
 	public function setVocabs($vocabs) {
+		// unset all associated topics!
+		foreach ($this->vocabs as $vocab) {
+			$vocab->setTopic(null);
+		}
+
 		$this->vocabs = $vocabs;
+		foreach ($this->vocabs as $vocab){
+			$vocab->setTopic($this);
+		}
+		return $this;
+	}
+
+	public function addVocabs(Vocab $vocab) {
+		$this->vocabs[] = $vocab;
+		$vocab->setTopic($this);
 		return $this;
 	}
 

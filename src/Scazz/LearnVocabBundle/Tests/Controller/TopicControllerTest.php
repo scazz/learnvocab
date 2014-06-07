@@ -74,9 +74,11 @@ class TopicControllerTest extends ControllerTestHelper {
 	public function testPostTopicAction() {
 		$this->setUpTest();
 		$this->fixtures();
-		$subject = LoadBundleData::$subjects[0];
+		$this->fixtures();
 
-		$serializedTopic = '{"topic":{"name":"test","isTemplate":false,"vocabs":[]}}';
+		$vocab = LoadBundleData::$vocabs[0];
+
+		$serializedTopic = '{"topic":{"name":"test","isTemplate":false,"vocabs":["'.$vocab->getId().'"]}}';
 		$route = $this->getUrl('api_1_post_topic', array('_format'=>'json'));
 		$this->client->request('POST', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedTopic );
 
@@ -85,6 +87,7 @@ class TopicControllerTest extends ControllerTestHelper {
 		$returnedTopic = json_decode($response->getContent());
 		$originalTopic = json_decode($serializedTopic);
 		$this->assertEquals($originalTopic->topic->name, $returnedTopic->topic->name);
+		$this->assertEquals($vocab->getId(), $returnedTopic->topic->vocabs[0]);
 	}
 
 	public function testPostTopicActionReturns400WithInvalidParameters() {

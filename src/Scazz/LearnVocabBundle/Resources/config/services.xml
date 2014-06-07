@@ -24,6 +24,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%learnvocab.topic.class%</argument>
             <argument type="service" id="form.factory"></argument>
+            <argument type="service" id="learnvocab.vocab.handler"></argument>
         </service>
         <service id="learnvocab.vocab.handler" class="%learnvocab.vocab.handler.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />

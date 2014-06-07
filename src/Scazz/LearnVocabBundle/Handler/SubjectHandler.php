@@ -52,7 +52,6 @@ class SubjectHandler {
 		$topicIds = array();
 		foreach( $parameters['topics'] as $topic_id) {
 			$topicIds[] = $topic_id;
-			echo "topic: $topic_id";
 		}
 		unset($parameters['topics']);
 

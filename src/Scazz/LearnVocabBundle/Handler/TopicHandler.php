@@ -13,12 +13,14 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class TopicHandler {
 	private $formFactory;
+	private $vocabHandler;
 
-	public function __construct(ObjectManager $om, $entityClass, FormFactoryInterface $formFactory) {
+	public function __construct(ObjectManager $om, $entityClass, FormFactoryInterface $formFactory, $vocabHandler) {
 		$this->om = $om;
 		$this->entityClass = $entityClass;
 		$this->repository = $this->om->getRepository($this->entityClass);
 		$this->formFactory = $formFactory;
+		$this->vocabHandler = $vocabHandler;
 	}
 
 	public function get($id)
@@ -43,7 +45,22 @@ class TopicHandler {
 	private function processForm(Topic $topic, array $parameters, $method='PUT') {
 		$form = $this->formFactory->create(new TopicTypeAPI(), $topic, array('method'=>$method));
 
+		$vocabIds = array();
+		if ( array_key_exists('vocabs', $parameters)) {
+			foreach( $parameters['vocabs'] as $vocab_id) {
+				$vocabIds[] = $vocab_id;
+			}
+			unset($parameters['vocabs']);
+		}
+
 		$form->submit($parameters);
+
+		foreach( $vocabIds as $vocabId ) {
+			$vocab = $this->vocabHandler->get($vocabId);
+			if ($vocab) {
+				$topic->addVocabs($vocab);
+			}
+		}
 
 		if ( $form->isValid()) {
 			$this->om->persist($topic);
