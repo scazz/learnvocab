@@ -19,7 +19,6 @@ class VocabType extends AbstractType
             ->add('translated')
             ->add('isLearnt')
             ->add('timesCorrectlyAnswered')
-            ->add('topic')
         ;
     }
 

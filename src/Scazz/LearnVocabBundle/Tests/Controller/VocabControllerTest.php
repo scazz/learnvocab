@@ -67,9 +67,24 @@ class VocabControllerTest extends ControllerTestHelper {
 		$this->client->request('POST', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedVocab );
 		$response = $this->client->getResponse();
 		$this->assertJsonResponse($response, 201, false );
-		$returnedTopic = json_decode($response->getContent());
-		$originalTopic = json_decode($serializedVocab);
-		$this->assertEquals($originalTopic->vocab->native, $returnedTopic->vocab->native);
-		$this->assertEquals($originalTopic->vocab->timesCorrectlyAnswered,$returnedTopic->vocab->timesCorrectlyAnswered);
+		$returnedVocab = json_decode($response->getContent());
+		$originalVocab = json_decode($serializedVocab);
+		$this->assertEquals($originalVocab->vocab->native, $returnedVocab->vocab->native);
+		$this->assertEquals($originalVocab->vocab->timesCorrectlyAnswered,$returnedVocab->vocab->timesCorrectlyAnswered);
+	}
+
+	public function testPutSubjectAction() {
+		$this->setUpTest();
+		$this->fixtures();
+		$vocab = LoadBundleData::$vocabs[0];
+
+		$serializedVocab = '{"vocab":{"native":"newNative","translated":"newtranslatedTest","isLearnt":true}}';
+		$route = $this->getUrl('api_1_put_vocab', array('id'=>$vocab->getId(),'_format'=>'json'));
+		$this->client->request('PUT', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedVocab );
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 201, false );
+		$returnedVocab = json_decode($response->getContent());
+
+		$this->assertNotEquals($vocab->getNative(), $returnedVocab->vocab->native );
 	}
 }

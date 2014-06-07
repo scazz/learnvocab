@@ -2,6 +2,7 @@
 namespace Scazz\LearnVocabBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Scazz\LearnVocabBundle\Form\VocabTypeAPI;
 use Scazz\LearnVocabBundle\Entity\Vocab;
@@ -36,6 +37,10 @@ class VocabHandler {
 	public function post(Request $request) {
 		$vocab = new Vocab();
 		return $this->processForm($vocab, $request->request->all()['vocab'], 'POST');
+	}
+
+	public function put(Request $request, Vocab $vocab) {
+		return $this->processForm($vocab, $request->request->all()['vocab'], 'PUT');
 	}
 
 	private function processForm(Vocab $vocab, array $parameters, $method='PUT') {

@@ -40,6 +40,18 @@ class VocabController extends FOSRestController {
 		return $response;
 	}
 
+	public function putVocabAction(Request $request, $id) {
+		$vocab = $this->getOr404($id);
+		try {
+			$this->container->get('learnvocab.vocab.handler')->put($request, $vocab);
+		}catch (InvalidFormException $exception) {
+			return $exception->getForm();
+		}
+		$response = $this->forward('ScazzLearnVocabBundle:Vocab:getVocab', array('id' => $vocab->getId()), array('_format'=>'json' ));
+		$response->setStatusCode("201");
+		return $response;
+	}
+
 	/**
 	 * Fetch Vocab or throw a 404 exception.
 	 *
