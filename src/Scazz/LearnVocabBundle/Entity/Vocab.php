@@ -7,6 +7,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Vocab
@@ -32,6 +33,7 @@ class Vocab
      *
      * @ORM\Column(name="native", type="string", length=255)
 	 * @Expose
+	 * @Assert\NotBlank()
      */
     private $native;
 
@@ -40,6 +42,7 @@ class Vocab
      *
      * @ORM\Column(name="translated", type="string", length=255)
 	 * @Expose
+	 * @Assert\NotBlank()
      */
     private $translated;
 
@@ -47,6 +50,7 @@ class Vocab
      * @var boolean
      *
      * @ORM\Column(name="isLearnt", type="boolean")
+	 * @SerializedName("isLearnt")
 	 * @Expose
      */
     private $isLearnt;
@@ -55,6 +59,8 @@ class Vocab
      * @var integer
      *
      * @ORM\Column(name="timesCorrectlyAnswered", type="integer")
+	 * @Assert\NotBlank()
+	 * @SerializedName("timesCorrectlyAnswered")
 	 * @Expose
      */
     private $timesCorrectlyAnswered;

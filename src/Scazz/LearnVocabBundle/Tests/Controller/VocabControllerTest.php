@@ -58,4 +58,18 @@ class VocabControllerTest extends ControllerTestHelper {
 		$this->assertArrayContainsAnObjectWithPropertyWithValue($content->vocabs, 'id', $vocabToLookFor->getId());
 		$this->assertArrayNotContainsAnObjectWithPropertyWithValue($content->vocabs, 'id', $vocabToExclude->getId());
 	}
+
+	public function testPostVocabAction() {
+		$this->setUpTest();
+
+		$serializedVocab = '{"vocab":{"native":"test","translated":"translatedTest","isLearnt":false,"timesCorrectlyAnswered":2}}';
+		$route = $this->getUrl('api_1_post_vocab', array('_format'=>'json'));
+		$this->client->request('POST', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedVocab );
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 201, false );
+		$returnedTopic = json_decode($response->getContent());
+		$originalTopic = json_decode($serializedVocab);
+		$this->assertEquals($originalTopic->vocab->native, $returnedTopic->vocab->native);
+		$this->assertEquals($originalTopic->vocab->timesCorrectlyAnswered,$returnedTopic->vocab->timesCorrectlyAnswered);
+	}
 }

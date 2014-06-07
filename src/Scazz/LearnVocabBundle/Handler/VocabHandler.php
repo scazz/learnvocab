@@ -2,13 +2,21 @@
 namespace Scazz\LearnVocabBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
+use Scazz\LearnVocabBundle\Form\VocabTypeAPI;
+use Scazz\LearnVocabBundle\Entity\Vocab;
+use Scazz\LearnVocabBundle\Exception\InvalidFormException;
+
 
 class VocabHandler {
 
-	public function __construct(ObjectManager $om, $entityClass) {
+	private $formFactory;
+
+	public function __construct(ObjectManager $om, $entityClass, $formFactory) {
 		$this->om = $om;
 		$this->entityClass = $entityClass;
 		$this->repository = $this->om->getRepository($this->entityClass);
+		$this->formFactory = $formFactory;
 	}
 
 	public function get($id)
@@ -23,5 +31,27 @@ class VocabHandler {
 			$vocabs = $this->repository->findById( $ids );
 		}
 		return $vocabs;
+	}
+
+	public function post(Request $request) {
+		$vocab = new Vocab();
+		return $this->processForm($vocab, $request->request->all()['vocab'], 'POST');
+	}
+
+	private function processForm(Vocab $vocab, array $parameters, $method='PUT') {
+		/* Set default options */
+		if (! array_key_exists('timesCorrectlyAnswered', $parameters)) {
+			$parameters['timesCorrectlyAnswered'] = 0;
+		}
+
+		$form = $this->formFactory->create(new VocabTypeAPI(), $vocab, array('method'=>$method));
+		$form->submit($parameters);
+
+		if ( $form->isValid()) {
+			$this->om->persist($vocab);
+			$this->om->flush();
+			return $vocab;
+		}
+		throw new InvalidFormException('Invalid submitted data', $form);
 	}
 }

@@ -45,6 +45,7 @@ class Subject
      *
      * @ORM\Column(name="isTemplate", type="boolean")
 	 * @Expose
+	 * @SerializedName("isTemplate")
      */
     private $isTemplate;
 
