@@ -1,12 +1,12 @@
 <?php
-use Liip\FunctionalTestBundle\Test\WebTestCase as WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
+
+namespace Scazz\LearnVocabBundle\Tests\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Client;
 
 use Scazz\LearnVocabBundle\Tests\Fixtures\Entity\LoadBundleData;
 
-class VocabControllerTest extends WebTestCase {
-	private $client;
+class VocabControllerTest extends ControllerTestHelper {
 
 	public function testJsonGetVocabAction() {
 		$this->setUpTest();
@@ -41,33 +41,4 @@ class VocabControllerTest extends WebTestCase {
 		$response = $this->client->getResponse();
 		$this->assertJsonResponse( $response );
 	}
-
-	private function setUpTest() {
-		$this->client = static::createClient();
-	}
-
-	private function fixtures() {
-		$fixtures = array( 'Scazz\LearnVocabBundle\Tests\Fixtures\Entity\LoadBundleData');
-		$this->loadFixtures( $fixtures );
-	}
-
-	protected function assertJsonResponse(Response $response, $statusCode = 200, $checkValidJson =  true, $contentType = 'application/json')
-	{
-		$this->assertEquals(
-			$statusCode, $response->getStatusCode(),
-			$response->getContent()
-		);
-		$this->assertTrue(
-			$response->headers->contains('Content-Type', $contentType),
-			$response->headers
-		);
-
-		if ($checkValidJson) {
-			$decode = json_decode($response->getContent());
-			$this->assertTrue(($decode != null && $decode != false),
-				'is response valid json: [' . $response->getContent() . ']'
-			);
-		}
-	}
-
 }

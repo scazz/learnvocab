@@ -8,9 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Client;
 
 use Scazz\LearnVocabBundle\Tests\Fixtures\Entity\LoadBundleData;
 
-class SubjectControllerTest extends WebTestCase {
-    private $client;
-
+class SubjectControllerTest extends ControllerTestHelper {
     public function testJsonGetSubjectAction() {
         $this->setUpTest();
 		$this->fixtures();
@@ -79,53 +77,4 @@ class SubjectControllerTest extends WebTestCase {
 		$content = json_decode( $response->getContent() );
 		$this->assertTrue( in_array( $topic->getId(), $content->subject->topics));
 	}
-
-    private function setUpTest() {
-        $this->client = static::createClient();
-    }
-
-	private function fixtures() {
-		$fixtures = array( 'Scazz\LearnVocabBundle\Tests\Fixtures\Entity\LoadBundleData');
-		$this->loadFixtures( $fixtures );
-	}
-
-	private function assertArrayContainsAnObjectWithPropertyWithValue($array, $property, $value) {
-		$found = $this->arrayContainsAnObjectWithPropertyWithValue($array, $property, $value);
-		$this->assertTrue($found);
-	}
-
-	private function assertArrayNotContainsAnObjectWithPropertyWithValue($array, $property, $value) {
-		$found = $this->arrayContainsAnObjectWithPropertyWithValue($array, $property, $value);
-		$this->assertFalse($found);
-	}
-
-	private function arrayContainsAnObjectWithPropertyWithValue( $array, $property, $value ) {
-		foreach ( $array as $testObject ) {
-			if ( property_exists( $testObject, $property)) {
-				if ($testObject->$property == $value) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-    protected function assertJsonResponse(Response $response, $statusCode = 200, $checkValidJson =  true, $contentType = 'application/json')
-    {
-        $this->assertEquals(
-            $statusCode, $response->getStatusCode(),
-            $response->getContent()
-        );
-        $this->assertTrue(
-            $response->headers->contains('Content-Type', $contentType),
-            $response->headers
-        );
-
-        if ($checkValidJson) {
-            $decode = json_decode($response->getContent());
-            $this->assertTrue(($decode != null && $decode != false),
-                'is response valid json: [' . $response->getContent() . ']'
-            );
-        }
-    }
 }
