@@ -46,6 +46,15 @@ class SubjectHandler {
 		return $this->processForm($subject, $request->request->all()['subject'], 'POST');
 	}
 
+	public function delete(Subject $subject) {
+		/* need to remove all associated topics */
+		foreach($subject->getTopics() as $topic) {
+			$this->topicHandler->delete($topic);
+		}
+		$this->om->remove($subject);
+		$this->om->flush();
+	}
+
 	private function processForm(Subject $subject, array $parameters, $method='PUT') {
 		$form = $this->formFactory->create(new SubjectTypeAPI(), $subject, array('method'=>$method));
 

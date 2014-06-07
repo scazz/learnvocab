@@ -114,4 +114,20 @@ class SubjectControllerTest extends ControllerTestHelper {
 
 		$this->assertNotEquals($subject->getName(), $returnedSubject->subject->name );
 	}
+
+	public function testDeleteSubjectAction() {
+		$this->setUpTest();
+		$this->fixtures();
+		$subject = LoadBundleData::$subjects[0];
+		$route = $this->getUrl('api_1_delete_subject', array('id'=>$subject->getId(),'_format'=>'json'));
+		$this->client->request('DELETE', $route, array());
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 204, false );
+
+		$route =  $this->getUrl('api_1_get_subject', array('id'=>$subject->getId(), '_format' => 'json'));
+		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
+		$response = $this->client->getResponse();
+		$this->assertEquals(404, $response->getStatusCode());
+
+	}
 }

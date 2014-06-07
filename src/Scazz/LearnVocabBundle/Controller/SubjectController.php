@@ -61,7 +61,14 @@ class SubjectController extends FOSRestController {
 		return $response;
 	}
 
-	/**
+	public function deleteSubjectAction($id) {
+		$subject = $this->getOr404($id);
+		$this->container->get('learnvocab.subject.handler')->delete( $subject );
+		return new View(null, 204);
+	}
+
+
+		/**
 	 * Fetch Subject or throw a 404 exception.
 	 *
 	 * @param mixed $id
