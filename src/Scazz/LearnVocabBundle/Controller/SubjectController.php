@@ -6,9 +6,11 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
+use Scazz\LearnVocabBundle\Exception\InvalidFormException;
 use Scazz\LearnVocabBundle\Entity\Subject;
 
 class SubjectController extends FOSRestController {
@@ -33,6 +35,21 @@ class SubjectController extends FOSRestController {
 			->get('learnvocab.subject.handler')
 			->getAll( $ids );
 		return array( 'subjects' => $data, 'meta'=>$paramFetcher->get('ids'));
+	}
+
+	public function postSubjectAction(Request $request) {
+		try {
+			$newSubject = $this
+				->container
+				->get('learnvocab.subject.handler')
+				->post( $request );
+
+		} catch(InvalidFormException $exception) {
+			return $exception->getForm();
+		}
+		$response = $this->forward('ScazzLearnVocabBundle:Subject:getSubject', array('id' => $newSubject->getId()), array('_format'=>'json' ));
+		$response->setStatusCode("201");
+		return $response;
 	}
 
 	/**

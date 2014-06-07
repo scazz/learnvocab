@@ -74,4 +74,29 @@ class SubjectControllerTest extends ControllerTestHelper {
 		$content = json_decode( $response->getContent() );
 		$this->assertTrue( in_array( $topic->getId(), $content->subject->topics));
 	}
+
+	public function testPostSubjectAction() {
+		$this->setUpTest();
+		$this->fixtures();
+
+		$serializedSubject = '{"subject":{"name":"test","isTemplate":false,"topics":[]}}';
+		$route = $this->getUrl('api_1_post_subject', array('_format'=>'json'));
+		$this->client->request('POST', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedSubject );
+
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 201, false );
+		$returnedSubject = json_decode($response->getContent());
+		$originalSubject = json_decode($serializedSubject);
+		$this->assertEquals($originalSubject->subject->name, $returnedSubject->subject->name);
+	}
+
+	public function testPostSubjectActionReturns400WithInvalidParameters() {
+		$this->setUpTest();
+
+		$serializedSubject = '{"subject":{"invalid":"test","fieldinvalid":false,"topics":[]}}';
+		$route = $this->getUrl('api_1_post_subject', array('_format'=>'json'));
+		$this->client->request('POST', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedSubject );
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 400, false );
+	}
 }

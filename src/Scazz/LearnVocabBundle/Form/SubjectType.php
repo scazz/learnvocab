@@ -16,6 +16,8 @@ class SubjectType extends AbstractType
     {
         $builder
             ->add('name')
+			->add('isTemplate')
+			->add('topics')
         ;
     }
     
