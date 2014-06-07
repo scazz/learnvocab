@@ -17,7 +17,12 @@ class TopicHandler {
 		return $this->repository->find($id);
 	}
 
-	public function getAll() {
-		return $this->repository->findAll();
+	public function getAll($ids=array()) {
+		if (empty($ids)) {
+			$topics = $this->repository->findAll();
+		} else {
+			$topics = $this->repository->findById( $ids );
+		}
+		return $topics;
 	}
 }

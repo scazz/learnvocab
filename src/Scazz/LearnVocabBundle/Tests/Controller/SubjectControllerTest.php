@@ -42,9 +42,6 @@ class SubjectControllerTest extends ControllerTestHelper {
 		$this->assertJsonResponse( $response );
 		$content = json_decode( $response->getContent() );
 
-	//	echo "\n\n ".$subjectToExclude->getId()."<-- \n";
-	//	echo "\n\n ".$subjectToLookFor->getId()."<-- \n";
-
 		$this->assertArrayContainsAnObjectWithPropertyWithValue($content->subjects, 'id', $subjectToLookFor->getId());
 		$this->assertArrayNotContainsAnObjectWithPropertyWithValue($content->subjects, 'id', $subjectToExclude->getId());
 	}

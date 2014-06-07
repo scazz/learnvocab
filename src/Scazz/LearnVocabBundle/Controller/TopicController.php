@@ -2,20 +2,32 @@
 
 namespace Scazz\LearnVocabBundle\Controller;
 
+use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
+
 class TopicController extends FOSRestController {
 
-	public function getTopicsAction() {
-		$view = View::create();
-		$data = $this
-			->container
+
+	/**
+	 * @param ParamFetcher $paramFetcher
+	 * @return array
+	 *
+	 * @QueryParam(array=true, name="ids", requirements="\d+", description="List of ids")
+	 */
+	public function getTopicsAction(ParamFetcher $paramFetcher) {
+
+		$ids = $paramFetcher->get('ids');
+
+		$data = $this->container
 			->get('learnvocab.topic.handler')
-			->getAll();
-		$view->setData( array( 'topics' => $data ));
-		return $view;
+			->getAll($ids);
+
+		return array( 'topics' => $data );
 	}
 
 	public function getTopicAction($id) {

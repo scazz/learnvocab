@@ -37,6 +37,11 @@ class LoadBundleData implements FixtureInterface {
 		$topic->setIsTemplate(false);
 		$topic->setSubject( $subject );
 
+		$topic2 = new Topic();
+		$topic2->setName("Animals");
+		$topic2->setIsTemplate(false);
+		$topic2->setSubject( $subject );
+
 		$vocab = new Vocab();
 		$vocab->setNative("cat");
 		$vocab->setTranslated("Katz");
@@ -45,11 +50,13 @@ class LoadBundleData implements FixtureInterface {
 		$this->om->persist($subject);
 		$this->om->persist($subject2);
 		$this->om->persist($topic);
+		$this->om->persist($topic2);
 		$this->om->persist($vocab);
 		$this->om->flush();
 		self::$subjects[] = $subject;
 		self::$subjects[] = $subject2;
 		self::$topics[] = $topic;
+		self::$topics[] = $topic2;
 		self::$vocabs[] = $vocab;
     }
 }

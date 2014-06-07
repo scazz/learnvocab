@@ -12,7 +12,7 @@ class TopicControllerTest extends ControllerTestHelper {
 	public function testJsonGetTopicAction() {
 		$this->setUpTest();
 		$this->fixtures();
-		$topic = array_pop( LoadBundleData::$topics );
+		$topic = LoadBundleData::$topics[0];
 		$vocab = array_pop( LoadBundleData::$vocabs );
 
 		$route =  $this->getUrl('api_1_get_topic', array('id'=>$topic->getId(), '_format' => 'json'));
@@ -38,6 +38,7 @@ class TopicControllerTest extends ControllerTestHelper {
 		$this->assertEquals( 404, $response->getStatusCode());
 	}
 
+
 	public function testJsonGetTopicsAction() {
 		$this->setUpTest();
 		$this->fixtures();
@@ -51,6 +52,23 @@ class TopicControllerTest extends ControllerTestHelper {
 		$this->assertObjectHasAttribute('topics', $content);
 		$this->assertArrayHasKey(0, $content->topics);
 		$this->assertObjectHasAttribute( 'id', $content->topics[0] );
+	}
+
+	public function testGetTopicsWithIdQueryParameters() {
+		$this->setUpTest();
+		$this->fixtures();
+
+		$topicToLookFor = array_pop( LoadBundleData::$topics );
+		$topicToExclude = array_pop( LoadBundleData::$topics );
+
+		$route =  $this->getUrl('api_1_get_topics', array('ids' => array($topicToLookFor->getId()), '_format' => 'json'));
+		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse( $response );
+		$content = json_decode( $response->getContent() );
+
+		$this->assertArrayContainsAnObjectWithPropertyWithValue($content->topics, 'id', $topicToLookFor->getId());
+		$this->assertArrayNotContainsAnObjectWithPropertyWithValue($content->topics, 'id', $topicToExclude->getId());
 	}
 
 }
