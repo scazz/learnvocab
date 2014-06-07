@@ -3,12 +3,17 @@
 namespace Scazz\LearnVocabBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Vocab
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Scazz\LearnVocabBundle\Entity\VocabRepository")
+ * @ExclusionPolicy("all")
  */
 class Vocab
 {
@@ -18,6 +23,7 @@ class Vocab
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @Expose
      */
     private $id;
 
@@ -25,6 +31,7 @@ class Vocab
      * @var string
      *
      * @ORM\Column(name="native", type="string", length=255)
+	 * @Expose
      */
     private $native;
 
@@ -32,6 +39,7 @@ class Vocab
      * @var string
      *
      * @ORM\Column(name="translated", type="string", length=255)
+	 * @Expose
      */
     private $translated;
 
@@ -39,6 +47,7 @@ class Vocab
      * @var boolean
      *
      * @ORM\Column(name="isLearnt", type="boolean")
+	 * @Expose
      */
     private $isLearnt;
 
@@ -46,6 +55,7 @@ class Vocab
      * @var integer
      *
      * @ORM\Column(name="timesCorrectlyAnswered", type="integer")
+	 * @Expose
      */
     private $timesCorrectlyAnswered;
 
@@ -68,6 +78,12 @@ class Vocab
 		return $this;
 	}
 
+	/**
+	 * Get Topic
+	 */
+	public function getTopic() {
+		return $this->topic;
+	}
 
 	/**
      * Get id

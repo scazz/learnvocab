@@ -1,10 +1,9 @@
 <?php
-
 namespace Scazz\LearnVocabBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-class SubjectHandler {
+class VocabHandler {
 
 	public function __construct(ObjectManager $om, $entityClass) {
 		$this->om = $om;
@@ -17,12 +16,7 @@ class SubjectHandler {
 		return $this->repository->find($id);
 	}
 
-	public function getAll($ids = array()) {
-		if (empty($ids)) {
-			$subjects = $this->repository->findAll();
-		} else {
-			$subjects = $this->repository->findById($ids);
-		}
-		return $subjects;
+	public function getAll() {
+		return $this->repository->findAll();
 	}
 }

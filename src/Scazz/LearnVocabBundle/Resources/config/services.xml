@@ -9,6 +9,8 @@
         <parameter key="learnvocab.subject.class">Scazz\LearnVocabBundle\Entity\Subject</parameter>
         <parameter key="learnvocab.topic.handler.class">Scazz\LearnVocabBundle\Handler\TopicHandler</parameter>
         <parameter key="learnvocab.topic.class">Scazz\LearnVocabBundle\Entity\Topic</parameter>
+        <parameter key="learnvocab.vocab.handler.class">Scazz\LearnVocabBundle\Handler\VocabHandler</parameter>
+        <parameter key="learnvocab.vocab.class">Scazz\LearnVocabBundle\Entity\Vocab</parameter>
     </parameters>
 
     <services>
@@ -19,6 +21,10 @@
         <service id="learnvocab.topic.handler" class="%learnvocab.topic.handler.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%learnvocab.topic.class%</argument>
+        </service>
+        <service id="learnvocab.vocab.handler" class="%learnvocab.vocab.handler.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%learnvocab.vocab.class%</argument>
         </service>
     </services>
 </container>
