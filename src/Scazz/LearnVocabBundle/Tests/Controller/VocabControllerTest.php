@@ -41,4 +41,21 @@ class VocabControllerTest extends ControllerTestHelper {
 		$response = $this->client->getResponse();
 		$this->assertJsonResponse( $response );
 	}
+
+	public function testGetVocabsWithIdQueryParameters() {
+		$this->setUpTest();
+		$this->fixtures();
+
+		$vocabToLookFor = array_pop( LoadBundleData::$vocabs );
+		$vocabToExclude = array_pop( LoadBundleData::$vocabs );
+
+		$route =  $this->getUrl('api_1_get_vocabs', array('ids' => array($vocabToLookFor->getId()), '_format' => 'json'));
+		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse( $response );
+		$content = json_decode( $response->getContent() );
+
+		$this->assertArrayContainsAnObjectWithPropertyWithValue($content->vocabs, 'id', $vocabToLookFor->getId());
+		$this->assertArrayNotContainsAnObjectWithPropertyWithValue($content->vocabs, 'id', $vocabToExclude->getId());
+	}
 }

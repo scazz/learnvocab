@@ -16,7 +16,12 @@ class VocabHandler {
 		return $this->repository->find($id);
 	}
 
-	public function getAll() {
-		return $this->repository->findAll();
+	public function getAll($ids = array()) {
+		if (empty($ids)) {
+			$vocabs = $this->repository->findAll();
+		} else {
+			$vocabs = $this->repository->findById( $ids );
+		}
+		return $vocabs;
 	}
 }

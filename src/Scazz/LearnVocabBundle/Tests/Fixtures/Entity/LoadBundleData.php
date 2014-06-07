@@ -47,16 +47,23 @@ class LoadBundleData implements FixtureInterface {
 		$vocab->setTranslated("Katz");
 		$vocab->setTopic( $topic );
 
+		$vocab2 = new Vocab();
+		$vocab2->setNative("mouse");
+		$vocab2->setTranslated("Maus");
+		$vocab2->setTopic( $topic );
+
 		$this->om->persist($subject);
 		$this->om->persist($subject2);
 		$this->om->persist($topic);
 		$this->om->persist($topic2);
 		$this->om->persist($vocab);
+		$this->om->persist($vocab2);
 		$this->om->flush();
 		self::$subjects[] = $subject;
 		self::$subjects[] = $subject2;
 		self::$topics[] = $topic;
 		self::$topics[] = $topic2;
 		self::$vocabs[] = $vocab;
+		self::$vocabs[] = $vocab2;
     }
 }
