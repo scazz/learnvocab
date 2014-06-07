@@ -42,6 +42,10 @@ class TopicHandler {
 		return $this->processForm($topic, $request->request->all()['topic'], 'POST');
 	}
 
+	public function put($request, Topic $topic) {
+		return $this->processForm($topic, $request->request->all()['topic'], 'POST');
+	}
+
 	private function processForm(Topic $topic, array $parameters, $method='PUT') {
 		$form = $this->formFactory->create(new TopicTypeAPI(), $topic, array('method'=>$method));
 

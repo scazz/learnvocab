@@ -55,6 +55,21 @@ class TopicController extends FOSRestController {
 		return $response;
 	}
 
+	public function putTopicAction(Request $request, $id) {
+		$topic = $this->getOr404($id);
+		try {
+			$this
+				->container
+				->get('learnvocab.topic.handler')
+				->put( $request, $topic );
+		} catch(InvalidFormException $exception) {
+			return $exception->getForm();
+		}
+		$response = $this->forward('ScazzLearnVocabBundle:Topic:getTopic', array('id' => $topic->getId()), array('_format'=>'json' ));
+		$response->setStatusCode("201");
+		return $response;
+	}
+
 	/**
 	 * Fetch Topic or throw a 404 exception.
 	 *

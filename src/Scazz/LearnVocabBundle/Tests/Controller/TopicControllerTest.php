@@ -100,4 +100,20 @@ class TopicControllerTest extends ControllerTestHelper {
 		$this->assertJsonResponse($response, 400, false );
 	}
 
+	public function testPutSubjectAction() {
+		$this->setUpTest();
+		$this->fixtures();
+		$topic = LoadBundleData::$topics[0];
+		$vocab = LoadBundleData::$vocabs[0];
+
+		$serializedTopic = '{"topic":{"name":"newName","isTemplate":false,"vocabs":["'.$vocab->getId().'"]}}';
+		$route = $this->getUrl('api_1_put_topic', array('id'=>$topic->getId(),'_format'=>'json'));
+		$this->client->request('PUT', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedTopic );
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 201, false );
+		$returnedTopic = json_decode($response->getContent());
+
+		$this->assertNotEquals($topic->getName(), $returnedTopic->topic->name );
+	}
+
 }
