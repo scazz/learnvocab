@@ -6,6 +6,7 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -68,6 +69,12 @@ class TopicController extends FOSRestController {
 		$response = $this->forward('ScazzLearnVocabBundle:Topic:getTopic', array('id' => $topic->getId()), array('_format'=>'json' ));
 		$response->setStatusCode("201");
 		return $response;
+	}
+
+	public function deleteTopicAction($id) {
+		$topic = $this->getOr404($id);
+		$this->container->get('learnvocab.topic.handler')->delete($topic);
+		return new View(null, 204);
 	}
 
 	/**

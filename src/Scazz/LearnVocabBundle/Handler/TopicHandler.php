@@ -46,6 +46,17 @@ class TopicHandler {
 		return $this->processForm($topic, $request->request->all()['topic'], 'POST');
 	}
 
+	public function delete(Topic $topic) {
+
+		/* need to delete all associated vocabs */
+		foreach($topic->getVocabs() as $vocab) {
+			$this->vocabHandler->delete($vocab);
+		}
+
+		$this->om->remove($topic);
+		$this->om->flush();
+	}
+
 	private function processForm(Topic $topic, array $parameters, $method='PUT') {
 		$form = $this->formFactory->create(new TopicTypeAPI(), $topic, array('method'=>$method));
 

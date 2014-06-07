@@ -116,4 +116,20 @@ class TopicControllerTest extends ControllerTestHelper {
 		$this->assertNotEquals($topic->getName(), $returnedTopic->topic->name );
 	}
 
+	public function testDeleteTopicAction() {
+		$this->setUpTest();
+		$this->fixtures();
+		$topic = LoadBundleData::$topics[0];
+		$route = $this->getUrl('api_1_delete_topic', array('id'=>$topic->getId(),'_format'=>'json'));
+		$this->client->request('DELETE', $route, array());
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 204, false );
+
+		$route =  $this->getUrl('api_1_get_topic', array('id'=>$topic->getId(), '_format' => 'json'));
+		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
+		$response = $this->client->getResponse();
+		$this->assertEquals(404, $response->getStatusCode());
+
+	}
+
 }
