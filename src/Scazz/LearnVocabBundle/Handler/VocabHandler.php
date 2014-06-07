@@ -43,6 +43,11 @@ class VocabHandler {
 		return $this->processForm($vocab, $request->request->all()['vocab'], 'PUT');
 	}
 
+	public function delete(Vocab $vocab) {
+		$this->om->remove($vocab);
+		$this->om->flush();
+	}
+
 	private function processForm(Vocab $vocab, array $parameters, $method='PUT') {
 		/* Set default options */
 		if (! array_key_exists('timesCorrectlyAnswered', $parameters)) {
@@ -59,4 +64,6 @@ class VocabHandler {
 		}
 		throw new InvalidFormException('Invalid submitted data', $form);
 	}
+
+
 }

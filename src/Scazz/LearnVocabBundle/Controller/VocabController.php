@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Scazz\LearnVocabBundle\Exception\InvalidFormException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -50,6 +51,12 @@ class VocabController extends FOSRestController {
 		$response = $this->forward('ScazzLearnVocabBundle:Vocab:getVocab', array('id' => $vocab->getId()), array('_format'=>'json' ));
 		$response->setStatusCode("201");
 		return $response;
+	}
+
+	public function deleteVocabAction($id) {
+		$vocab = $this->getOr404($id);
+		$this->container->get('learnvocab.vocab.handler')->delete($vocab);
+		return new Response(null, 204);
 	}
 
 	/**

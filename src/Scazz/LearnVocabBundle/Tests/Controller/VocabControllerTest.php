@@ -73,7 +73,7 @@ class VocabControllerTest extends ControllerTestHelper {
 		$this->assertEquals($originalVocab->vocab->timesCorrectlyAnswered,$returnedVocab->vocab->timesCorrectlyAnswered);
 	}
 
-	public function testPutSubjectAction() {
+	public function testPutVocabAction() {
 		$this->setUpTest();
 		$this->fixtures();
 		$vocab = LoadBundleData::$vocabs[0];
@@ -86,5 +86,21 @@ class VocabControllerTest extends ControllerTestHelper {
 		$returnedVocab = json_decode($response->getContent());
 
 		$this->assertNotEquals($vocab->getNative(), $returnedVocab->vocab->native );
+	}
+
+	public function testDeleteVocabAction() {
+		$this->setUpTest();
+		$this->fixtures();
+		$vocab = LoadBundleData::$vocabs[0];
+		$route = $this->getUrl('api_1_delete_vocab', array('id'=>$vocab->getId(),'_format'=>'json'));
+		$this->client->request('DELETE', $route, array());
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 204, false );
+
+		$route =  $this->getUrl('api_1_get_vocab', array('id'=>$vocab->getId(), '_format' => 'json'));
+		$this->client->request('GET', $route, array('ACCEPT' => 'application/json'));
+		$response = $this->client->getResponse();
+		$this->assertEquals(404, $response->getStatusCode());
+
 	}
 }
