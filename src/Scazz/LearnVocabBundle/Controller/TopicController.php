@@ -7,7 +7,9 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
 
+use Scazz\LearnVocabBundle\Exception\InvalidFormException;
 
 
 class TopicController extends FOSRestController {
@@ -36,6 +38,21 @@ class TopicController extends FOSRestController {
 		$data = $this->getOr404($id);
 		$view->setData( array('topic' => $data));
 		return $view;
+	}
+
+	public function postTopicAction(Request $request) {
+		try {
+			$newTopic = $this
+				->container
+				->get('learnvocab.topic.handler')
+				->post( $request );
+
+		} catch(InvalidFormException $exception) {
+			return $exception->getForm();
+		}
+		$response = $this->forward('ScazzLearnVocabBundle:Topic:getTopic', array('id' => $newTopic->getId()), array('_format'=>'json' ));
+		$response->setStatusCode("201");
+		return $response;
 	}
 
 	/**

@@ -78,6 +78,10 @@ class Topic
 		return $this;
 	}
 
+	public function getSubject() {
+		return $this->subject;
+	}
+
 	/**
      * Set name
      *
@@ -126,6 +130,11 @@ class Topic
 
 	public function getVocabs() {
 		return $this->vocabs;
+	}
+
+	public function setVocabs($vocabs) {
+		$this->vocabs = $vocabs;
+		return $this;
 	}
 
 	/**

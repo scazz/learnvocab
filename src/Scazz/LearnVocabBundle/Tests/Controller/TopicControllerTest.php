@@ -71,4 +71,29 @@ class TopicControllerTest extends ControllerTestHelper {
 		$this->assertArrayNotContainsAnObjectWithPropertyWithValue($content->topics, 'id', $topicToExclude->getId());
 	}
 
+	public function testPostTopicAction() {
+		$this->setUpTest();
+		$this->fixtures();
+
+		$serializedTopic = '{"topic":{"name":"test","isTemplate":false,"vocabs":[]}}';
+		$route = $this->getUrl('api_1_post_topic', array('_format'=>'json'));
+		$this->client->request('POST', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedTopic );
+
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 201, false );
+		$returnedTopic = json_decode($response->getContent());
+		$originalTopic = json_decode($serializedTopic);
+		$this->assertEquals($originalTopic->topic->name, $returnedTopic->topic->name);
+	}
+
+	public function testPostTopicActionReturns400WithInvalidParameters() {
+		$this->setUpTest();
+
+		$serializedTopic = '{"topic":{"invalid":"test","fieldinvalid":false,"vocabs":[]}}';
+		$route = $this->getUrl('api_1_post_topic', array('_format'=>'json'));
+		$this->client->request('POST', $route, array(), array(), array('CONTENT_TYPE' => 'application/json'), $serializedTopic );
+		$response = $this->client->getResponse();
+		$this->assertJsonResponse($response, 400, false );
+	}
+
 }
