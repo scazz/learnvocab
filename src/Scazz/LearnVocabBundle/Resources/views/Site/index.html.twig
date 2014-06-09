@@ -1,20 +1,72 @@
 <!DOCTYPE html>
-<html lang="${user.language}">
+<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>LearnVocab.net</title>
-
+    <meta charset="utf-8">
+    <title>LearnVocab.net - free site to help you learn a second language</title>
     {% stylesheets '@ScazzLearnVocabBundle/Resources/public/css/*' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
-
-
-    {% javascripts
-    '@ScazzLearnVocabBundle/Resources/public/js/app.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
 </head>
 
+<body>
+
+<div class="container">
+
+    <!-- Static navbar -->
+    <br />
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Learn Vocab</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">About LearnVocab</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li ><a href="./register">Register</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </div>
+
+    <!-- jumbotron -->
+    <div class="jumbotron">
+        <h1> Welcome to LearnVocab.net </h1>
+
+        <p>Free site geared to help you boost your vocab for a foreign language:
+        <ul>
+            <li> Works great on mobile platforms </li>
+            <li> Smart testing - focuses on words you regularly get wrong </li>
+            <li> Prepopulated vocab lists - learn the vocab you're interested in </li>
+            <li> Specific words you need to know? No problem, create a custom list or add the word to one of your prepopulated lists </li>
+            <li> And loads more! </li>
+        </ul>
+        </p>
+
+        <p>You can get started by logging in for free with facebook, or creating your own account</p>
+        <p>
+            <a class="btn btn-lg btn-primary" href="login" role="button">Login</a>
+        </p>
+    </div>
+
+
+
+
+</div>
+
+{% javascripts
+    '@ScazzLearnVocabBundle/Resources/public/js/libs/bootstrap.min.js'
+    '@ScazzLearnVocabBundle/Resources/public/js/libs/jquery.js'
+%}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+</body>
 </html>
