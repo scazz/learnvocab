@@ -10,10 +10,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class SiteController extends Controller {
 
 	/**
-	 * @Route("/")
+	 * @Route("/about")
 	 * @Template()
 	 */
 	public function indexAction() {
+
+	}
+	/**
+	 * @Route("/")
+	 * @Template()
+	 */
+	public function appAction() {
 
 	}
 }
