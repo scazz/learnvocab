@@ -14,22 +14,9 @@ security:
 
   firewalls:
     main:
-      pattern: ^/
-      form_login:
-        provider: fos_userbundle
-        csrf_provider: form.csrf_provider
-        # send user to the home page, not to the login page if they arrive at the site without being logged in
-        login_path: /about
-        # load the app after logging in
-        always_use_default_target_path: true
-        default_target_path:            /
-      logout:       true
-      anonymous:    true
+      pattern: ^/api/v1
+      auth: true
+      stateless: true
+      #logout: true
 
-  access_control:
-    - { path: ^/about$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/_wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/, role: ROLE_USER }
+

@@ -19,7 +19,12 @@ learnvocab_api_Vocab:
      resource: "Scazz\\LearnVocabBundle\Controller\VocabController"
      name_prefix:  api_1_
 
-_demo:
+learnvocab_site:
     resource:  "Scazz\\LearnVocabBundle\Controller\SiteController"
     type:     annotation
     prefix:   /
+
+learnvocab_security:
+      resource: "Scazz\\LearnVocabBundle\Controller\SecurityController"
+      type:     annotation
+      prefix:   /

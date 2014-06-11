@@ -22,6 +22,10 @@ class User extends BaseUser
      */
     protected $id;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="SessionKey", mappedBy="user")
+	 */
+	protected $keys;
 
     /**
      * Get id
@@ -32,4 +36,10 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+	public function getKeys() {
+		return $this->keys;
+	}
+
+
 }

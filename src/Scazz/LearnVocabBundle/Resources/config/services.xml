@@ -11,9 +11,20 @@
         <parameter key="learnvocab.topic.class">Scazz\LearnVocabBundle\Entity\Topic</parameter>
         <parameter key="learnvocab.vocab.handler.class">Scazz\LearnVocabBundle\Handler\VocabHandler</parameter>
         <parameter key="learnvocab.vocab.class">Scazz\LearnVocabBundle\Entity\Vocab</parameter>
+        <parameter key="learnvocab.user.class">Scazz\LearnVocabBundle\Entity\User</parameter>
+        <parameter key="learnvocab.user.repository">Scazz\LearnVocabBundle\Entity\UserRepository</parameter>
     </parameters>
 
     <services>
+            <service id="auth.security.authentication.provider"
+                     class="Scazz\LearnVocabBundle\Security\Authentication\Provider\AuthProvider" public="false">
+                <argument /> <!-- User Provider -->
+            </service>
+            <service id="auth.security.authentication.listener"
+                     class="Scazz\LearnVocabBundle\Security\Firewall\AuthListener" public="false">
+                <argument type="service" id="security.context"/>
+                <argument type="service" id="security.authentication.manager" />
+            </service>
         <service id="learnvocab.subject.handler" class="%learnvocab.subject.handler.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%learnvocab.subject.class%</argument>
