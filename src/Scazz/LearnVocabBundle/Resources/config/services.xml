@@ -13,6 +13,8 @@
         <parameter key="learnvocab.vocab.class">Scazz\LearnVocabBundle\Entity\Vocab</parameter>
         <parameter key="learnvocab.user.class">Scazz\LearnVocabBundle\Entity\User</parameter>
         <parameter key="learnvocab.user.repository">Scazz\LearnVocabBundle\Entity\UserRepository</parameter>
+        <parameter key="learnvocab.user.handler.class">Scazz\LearnVocabBundle\Handler\UserHandler</parameter>
+        <parameter key="learnvocab.sessionkey.handler.class">Scazz\LearnVocabBundle\Handler\SessionKeyHandler</parameter>
     </parameters>
 
     <services>
@@ -41,6 +43,16 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%learnvocab.vocab.class%</argument>
             <argument type="service" id="form.factory"></argument>
+        </service>
+        <service id="learnvocab.user.handler" class="%learnvocab.user.handler.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%learnvocab.user.class%</argument>
+            <argument type="service" id="form.factory"></argument>
+            <argument type="service" id="fos_user.user_manager"></argument>
+            <argument type="service" id="event_dispatcher"></argument>
+        </service>
+        <service id="learnvocab.sessionkey.handler" class="%learnvocab.sessionkey.handler.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
 </container>

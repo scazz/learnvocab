@@ -28,7 +28,7 @@ class AuthListener implements ListenerInterface
 		$request = $event->getRequest();
 
 		if ( !$request->headers->has('token'))  {
-			$event->setResponse( $this->failResponse() );
+			//$event->setResponse( $this->failResponse() );
 			return;
 		}
 		if ( !$request->headers->has('username'))  {

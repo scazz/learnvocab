@@ -70992,6 +70992,36 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
+Ember.TEMPLATES["home"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1, helper, options;
+  data.buffer.push(" \r\n			");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
+    'class': ("btn btn-lg btn-primary")
+  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "register", options) : helperMissing.call(depth0, "link-to", "register", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n		");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  
+  data.buffer.push("Register now!");
+  }
+
+  data.buffer.push("<div class=\"jumbotron\">\r\n	<h1> Welcome to LearnVocab.net </h1>\r\n\r\n	<p>Free site geared to help you boost your vocab for a forign language:\r\n		<ul>\r\n			<li> Works great on mobile platforms </li>\r\n			<li> Smart testing - focuses on words you regularly get wrong </li>\r\n			<li> Prepopulated vocab lists - learn the vocab you're interested in </li>\r\n			<li> Specific words you need to know? No problem, create a custom list or add the word to one of your prepopulated lists </li>\r\n			<li> And loads more! </li>\r\n		</ul> \r\n	</p>\r\n\r\n	<p>You can get started by logging in for free with facebook, or creating your own account</p>\r\n	<p>\r\n		");
+  stack1 = helpers.unless.call(depth0, "session.isLoggedIn", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n		</p>\r\n</div>");
+  return buffer;
+  
+});
+
 Ember.TEMPLATES["index"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -71018,7 +71048,7 @@ function program1(depth0,data) {
 Ember.TEMPLATES["login"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, self=this, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
   
@@ -71030,9 +71060,7 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  stack1 = helpers['if'].call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n\r\n<form class=\"form-inline\" ");
+  data.buffer.push("<form class=\"form-inline\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "login", {hash:{
     'on': ("submit")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
@@ -71055,6 +71083,9 @@ function program1(depth0,data) {
     'class': ("btn-small")
   },hashTypes:{'type': "STRING",'value': "STRING",'class': "STRING"},hashContexts:{'type': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\r\n</form>\r\n\r\n");
+  stack1 = helpers['if'].call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n");
   return buffer;
   
 });
@@ -71062,18 +71093,30 @@ function program1(depth0,data) {
 Ember.TEMPLATES["navigation"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
   var buffer = '', stack1, helper, options;
+  data.buffer.push("\r\n      <ul class=\"nav navbar-nav\">\r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Choose subject<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n    	     	");
+  stack1 = helpers.each.call(depth0, "availableSubjects", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n           	<li class=\"divider\"></li>\r\n            <li>");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "subjects", options) : helperMissing.call(depth0, "link-to", "subjects", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</li>\r\n      	  </ul>\r\n        </li>\r\n      </ul>\r\n      ");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = '', stack1, helper, options;
   data.buffer.push("\r\n              <li> ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "topics", "", options) : helperMissing.call(depth0, "link-to", "topics", "", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "topics", "", options) : helperMissing.call(depth0, "link-to", "topics", "", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</a></li>\r\n            ");
   return buffer;
   }
-function program2(depth0,data) {
+function program3(depth0,data) {
   
   var stack1;
   stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
@@ -71081,68 +71124,149 @@ function program2(depth0,data) {
   else { data.buffer.push(''); }
   }
 
-function program4(depth0,data) {
+function program5(depth0,data) {
   
   
   data.buffer.push("Manage subjects");
   }
 
-function program6(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = '', stack1, helper, options;
   data.buffer.push("\r\n	      <ul class=\"nav navbar-nav\">\r\n	        <li class=\"dropdown\">\r\n	          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Choose topic<b class=\"caret\"></b></a>\r\n	          \r\n	          <ul class=\"dropdown-menu\">\r\n              ");
-  stack1 = helpers.each.call(depth0, "availableTopics", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, "availableTopics", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n              <li class=\"divider\"></li>\r\n              <li>");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "topics", options) : helperMissing.call(depth0, "link-to", "topics", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "topics", options) : helperMissing.call(depth0, "link-to", "topics", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</a></li>\r\n            </ul>\r\n          </li>\r\n        </ul>\r\n      ");
   return buffer;
   }
-function program7(depth0,data) {
+function program8(depth0,data) {
   
   var buffer = '', stack1, helper, options;
   data.buffer.push("\r\n                <li>");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "vocabs", "", options) : helperMissing.call(depth0, "link-to", "vocabs", "", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "vocabs", "", options) : helperMissing.call(depth0, "link-to", "vocabs", "", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</li>\r\n              ");
   return buffer;
   }
 
-function program9(depth0,data) {
+function program10(depth0,data) {
   
   
   data.buffer.push("Manage topics");
   }
 
-function program11(depth0,data) {
+function program12(depth0,data) {
   
   var buffer = '', stack1, helper, options;
-  data.buffer.push("\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        <li >");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(12, program12, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "topic.test", options) : helperMissing.call(depth0, "link-to", "topic.test", options));
+  data.buffer.push("\r\n          <li >");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "topic.test", options) : helperMissing.call(depth0, "link-to", "topic.test", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\r\n      </ul>\r\n      ");
+  data.buffer.push("</li>\r\n        ");
   return buffer;
   }
-function program12(depth0,data) {
+function program13(depth0,data) {
   
   
   data.buffer.push("Test yourself");
   }
 
-  data.buffer.push("<div class=\"navbar navbar-default\" role=\"navigation\">\r\n	<div class=\"container-fluid\">\r\n		\r\n		<div class=\"navbar-header\">\r\n    	<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\r\n      	<span class=\"sr-only\">Toggle navigation</span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <a class=\"navbar-brand\" href=\"#\">Learn Vocab</a>\r\n    </div>\r\n    \r\n\r\n    <div class=\"navbar-collapse collapse\">\r\n      <ul class=\"nav navbar-nav\">\r\n        <li class=\"dropdown\">\r\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Choose subject<b class=\"caret\"></b></a>\r\n          <ul class=\"dropdown-menu\">\r\n    	     	");
-  stack1 = helpers.each.call(depth0, "availableSubjects", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+function program15(depth0,data) {
+  
+  var buffer = '', stack1, helper, options;
+  data.buffer.push("\r\n          <li >");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(16, program16, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "logout", options) : helperMissing.call(depth0, "link-to", "logout", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n           	<li class=\"divider\"></li>\r\n            <li>");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "subjects", options) : helperMissing.call(depth0, "link-to", "subjects", options));
+  data.buffer.push("</li>\r\n        ");
+  return buffer;
+  }
+function program16(depth0,data) {
+  
+  
+  data.buffer.push("Log out");
+  }
+
+function program18(depth0,data) {
+  
+  var buffer = '', stack1, helper, options;
+  data.buffer.push("\r\n          <li >");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(19, program19, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "login", options) : helperMissing.call(depth0, "link-to", "login", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\r\n      	  </ul>\r\n        </li>\r\n      </ul>\r\n\r\n      ");
-  stack1 = helpers['if'].call(depth0, "availableTopics", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("</li>\r\n        ");
+  return buffer;
+  }
+function program19(depth0,data) {
+  
+  
+  data.buffer.push("Log in");
+  }
+
+  data.buffer.push("<div class=\"navbar navbar-default\" role=\"navigation\">\r\n	<div class=\"container-fluid\">\r\n		\r\n		<div class=\"navbar-header\">\r\n    	<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\r\n      	<span class=\"sr-only\">Toggle navigation</span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <a class=\"navbar-brand\" href=\"#\">Learn Vocab</a>\r\n    </div>\r\n    \r\n    <div class=\"navbar-collapse collapse\">\r\n      ");
+  stack1 = helpers['if'].call(depth0, "session.isLoggedIn", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n      \r\n      ");
-  stack1 = helpers['if'].call(depth0, "availableVocabs", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\r\n\r\n      ");
+  stack1 = helpers['if'].call(depth0, "availableTopics", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n    </div><!--/.nav-collapse -->\r\n  </div><!--/.container-fluid -->\r\n</div>\r\n");
+  data.buffer.push("\r\n      \r\n      \r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        ");
+  stack1 = helpers['if'].call(depth0, "availableVocabs", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n        ");
+  stack1 = helpers['if'].call(depth0, "session.isLoggedIn", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(18, program18, data),fn:self.program(15, program15, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n      </ul>\r\n      \r\n\r\n     \r\n    </div><!--/.nav-collapse -->\r\n  </div><!--/.container-fluid -->\r\n</div>\r\n");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["register"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n	<div class=\"alert alert-error\">");
+  stack1 = helpers._triageMustache.call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</div>\r\n");
+  return buffer;
+  }
+
+  data.buffer.push("<form class=\"form-inline\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "register", {hash:{
+    'on': ("submit")
+  },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push("> \r\n\r\n");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("email"),
+    'value': ("email"),
+    'placeholder': ("Email address")
+  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("text"),
+    'value': ("username"),
+    'placeholder': ("Username")
+  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("password"),
+    'value': ("password"),
+    'placeholder': ("Password")
+  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n");
+  data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'type': ("submit"),
+    'class': ("btn-small"),
+    'value': ("Register")
+  },hashTypes:{'type': "STRING",'class': "STRING",'value': "STRING"},hashContexts:{'type': depth0,'class': depth0,'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  data.buffer.push("\r\n\r\n</form>\r\n\r\n");
+  stack1 = helpers['if'].call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n");
   return buffer;
   
 });
@@ -71433,13 +71557,27 @@ App.Session = Em.Object.extend({
 	}.observes("username"),
 
 	tokenChanged: function() {
-		localStorage.token = this.get("authToken");
-	}.observes("authToken")
+		var token = this.get("authToken");
+		if (token) {
+			localStorage.token = this.get("authToken");
+		} else {
+			delete localStorage.token;
+		}
+		
+	}.observes("authToken"),
+
+	isLoggedIn: function() {
+		return this.get("authToken") ? true : false;
+	}.property("authToken")
+	
 });
 
 
 App.Router.map(function() {
 	this.route('login');
+	this.route('logout');
+	this.route('register');
+	this.route('home', {path: '/'});
 	this.resource('subjects', {path: '/subjects'}, function() {
 		this.route('delete', {path: '/:subject_id/delete'});
 	});
@@ -71476,14 +71614,87 @@ App.LoginRoute = Ember.Route.extend({
 	}
 });
 
-App.LoginController = Ember.ObjectController.extend({
+App.HomeRoute = Ember.Route.extend({
+
+});
+
+App.RegisterController = Ember.ObjectController.extend({
 	username: '',
+	email: '',
+	password: '',
+	errorMessage: '',
+
+	actions: {
+		register: function() {
+			var self = this;
+			var username = this.get("username");
+			var email = this.get("email");
+			var password = this.get("password");
+			var formHasErrors = false;
+			var errorMessage = "";
+
+
+			if (!username) {
+				formHasErrors = true;
+				errorMessage += "Username cannot be blank.";	
+			}
+			if (!password || password.length < 3) {
+				formHasErrors = true;
+				errorMessage += "Password must be longer than 4 characters.";	
+			}
+			if (!email) {
+				formHasErrors = true;
+				errorMessage += "You must enter a valid email address";	
+			}
+			if (formHasErrors) {
+				this.set("errorMessage", errorMessage);
+				return;
+			} 
+			this.set("errorMessage", null);
+			console.log("registering");
+			Ember.$.post('/api/v1/users', {
+				username: username,
+				plainPassword: password,
+				email: email
+			}).then( function(response) {
+				if (typeof response!=='object') {
+					response = Ember.$.parseJSON(response);
+				}
+				self.set('session.username', username);
+				self.set('session.authToken', response.token);
+				self.transitionToRoute("subjects");
+			}, function(responsePromise) {
+				var response = responsePromise.responseText;
+				response = Ember.$.parseJSON(response);
+				self.set("errorMessage", response.message);
+			});
+		}
+	}
+});
+
+
+App.LogoutRoute = Ember.Route.extend({
+	setupController: function( controller, context ) {
+		controller.logout();
+	}
+});
+
+App.LogoutController = Ember.ObjectController.extend ({
+	logout: function() {
+		this.set("session.authToken", "");
+		this.transitionToRoute("home");
+	}
+});
+
+App.LoginController = Ember.ObjectController.extend({
+	username: function() {
+		return this.get("session.username");
+	}.property("session.username"),
 	password: '',
 	errorMessage: '',
 
 	reset: function() {
 		this.setProperties({
-			'username': "",
 			'password': "",
 			'errorMessage': ""
 		});
@@ -71497,11 +71708,16 @@ App.LoginController = Ember.ObjectController.extend({
 			self.set('errorMessage', null);
 			self.set('session.username', data.username);
 
-			Ember.$.getJSON('/api/token', data).then( function(response) {
+			Ember.$.post('/api/token', data).then( function(response) {
+				if (typeof response!=='object') {
+					response = Ember.$.parseJSON(response);
+				}
 				self.set('errorMessage', response.message);
 				if (response.success) {
 					self.set('session.authToken', response.token);
 					self.transitionToRoute("subjects");
+				} else {
+					self.set('password', '');
 				} 
 			});
 		}
@@ -71517,11 +71733,12 @@ App.ApplicationController = Ember.ObjectController.extend({
 	needs: ['subjects', 'subject', 'topic', 'vocabs'],
 
 	availableSubjects: function(){
-		if (this.get('currentPath').indexOf('subject') > -1) {
+		//if (this.get('currentPath').indexOf('subject') > -1) {
+		if (this.get("session.isLoggedIn")) {
 			var subjects = this.get('controllers.subjects.custom');
 			return subjects.get('firstObject') !== undefined ? subjects : this.store.find('subject');
 		}
-   }.property('currentPath'),
+   }.property('session.authToken'),
 
   availableTopics: function() {
 		if (this.get('currentPath').indexOf('topic') > -1) {
@@ -72063,4 +72280,112 @@ App.Vocab = DS.Model.extend({
 });
 
 
+/*App.VocabsRoute = Ember.Route.extend({
+	model: function() {
+		return this.modelFor('topic').get('vocabs');
+	}
+});
+
+
+
+
+App.VocabsController = Ember.ArrayController.extend({
+	needs: ['subject', 'topic'],
+
+	sortAscending: true,
+	sortProperties: ['isLearnt'],
+	newNative: '',
+	newTranslated: '',
+
+	isNativeInputValid: true,
+	isTranslatedInputValid: true,
+
+	validateNewVocabInputs: function() {
+		var errors=0;
+		if (! this.get('newNative')) {
+			this.set('isNativeInputValid', false);
+			errors++;
+		} else {
+			this.set('isNativeInputValid', true);
+		}
+
+		if (! this.get('newTranslated')) {
+			this.set('isTranslatedInputValid', false);
+			errors++;
+		} else {
+			this.set('isTranslatedInputValid', true);
+		}
+		return errors === 0;
+	},
+
+	deleteVocab: function(vocab) {
+		var topicController = this.get("controllers.topic");
+		var vocabs = topicController.get('vocabs');
+		vocabs.removeObject(vocab);
+		topicController.get('model').save();
+	},
+
+	actions: {
+		createNewVocab: function() {
+			var nativeWord = this.get('newNative');
+			var translatedWord = this.get('newTranslated');
+
+			if (this.validateNewVocabInputs()) {
+
+				var vocab = this.store.createRecord('vocab', {
+					native: nativeWord,
+					translated: translatedWord,
+					isLearnt: false
+				});
+
+				var topicController = this.get("controllers.topic");
+				var vocabs = topicController.get('vocabs');
+
+				vocab.save().then(function() {
+					vocabs.pushObject(vocab);
+					topicController.get('model').save();
+				});
+				this.set('newNative', '');
+				this.set('newTranslated', ''); 
+			}
+		},
+		deleteVocabWithConfirmation: function(vocab) {
+			this.transitionToRoute('vocab.delete', vocab);
+		}
+
+	}
+});
+
+App.VocabController = Ember.ObjectController.extend({
+	isLearnt: function(key, value){
+    var model = this.get('model');
+
+    if (value === undefined) {
+      // property being used as a getter
+      return model.get('isLearnt');
+    } else {
+      // property being used as a setter
+      model.set('isLearnt', value);
+      model.save();
+      return value;
+    }
+  }.property('model.isLearnt')
+});
+
+App.VocabDeleteController = Ember.ObjectController.extend({
+	needs: 'vocabs',
+	actions: {
+		cancelDelete: function() {
+			this.transitionToRoute('vocabs');
+		},
+		delete: function() {
+			var VocabsController = this.get('controllers.vocabs');
+			var vocab = this.get('model');
+			VocabsController.deleteVocab(vocab);
+			vocab.deleteRecord();
+			vocab.save();
+			this.transitionToRoute('vocabs');
+		}
+	}
+});*/
 //# sourceMappingURL=app.js.map

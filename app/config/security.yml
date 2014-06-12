@@ -14,9 +14,14 @@ security:
 
   firewalls:
     main:
-      pattern: ^/api/v1
+      pattern: ^/
       auth: true
       stateless: true
+      anonymous: ~
       #logout: true
 
+
+  access_control:
+            - { path: ^/api/v1/users, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/api/v1/, roles: IS_AUTHENTICATED_FULLY }
 
