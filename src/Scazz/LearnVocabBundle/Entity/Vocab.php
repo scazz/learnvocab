@@ -71,6 +71,12 @@ class Vocab
 	 */
 	private $topic;
 
+	/**
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="vocabs")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	 */
+	private $user;
+
 	public function __construct() {
 		$this->setIsLearnt( false );
 		$this->setTimesCorrectlyAnswered(0);
@@ -192,4 +198,12 @@ class Vocab
     {
         return $this->timesCorrectlyAnswered;
     }
+
+	public function getUser() {
+		return $this->user;
+	}
+	public function setUser(User $user) {
+		$this->user = $user;
+		return $this;
+	}
 }

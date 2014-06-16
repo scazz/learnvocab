@@ -6,9 +6,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Scazz\LearnVocabBundle\Entity\Topic;
 use Scazz\LearnVocabBundle\Form\TopicTypeAPI;
 use Scazz\LearnVocabBundle\Exception\InvalidFormException;
-
+use Scazz\LearnVocabBundle\Entity\User;
 use Symfony\Component\Form\FormFactoryInterface;
-
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 
 class TopicHandler {
@@ -23,27 +23,36 @@ class TopicHandler {
 		$this->vocabHandler = $vocabHandler;
 	}
 
-	public function get($id)
+	public function get($id, User $user=null)
 	{
-		return $this->repository->find($id);
+		$topic = $this->repository->find($id);
+
+		if (is_object($topic->getUser()) &&
+			is_object($user) &&
+			$topic->getUser()->getId() != $user->getId()) {
+			throw new AccessDeniedException("You do not have permission to view this resource");
+		}
+		return $topic;
 	}
 
-	public function getAll($ids=array()) {
+	public function getAll(User $user, $ids=array()) {
 		if (empty($ids)) {
-			$topics = $this->repository->findAll();
+			$topics = $this->repository->findAllByUser($user);
 		} else {
-			$topics = $this->repository->findById( $ids );
+			$topics = $this->repository->findAllByUserAndIds( $user, $ids );
 		}
 		return $topics;
 	}
 
-	public function post($request) {
+	public function post($request, User $user) {
 		$topic = new Topic();
-		return $this->processForm($topic, $request->request->all()['topic'], 'POST');
+		$params =  $request->request->all()['topic'];
+		return $this->processForm($topic, $params, 'POST', $user);
 	}
 
-	public function put($request, Topic $topic) {
-		return $this->processForm($topic, $request->request->all()['topic'], 'POST');
+	public function put($request, Topic $topic, User $user) {
+		$params = $request->request->all()['topic'];
+		return $this->processForm($topic, $params, 'POST', $user);
 	}
 
 	public function delete(Topic $topic) {
@@ -57,7 +66,7 @@ class TopicHandler {
 		$this->om->flush();
 	}
 
-	private function processForm(Topic $topic, array $parameters, $method='PUT') {
+	private function processForm(Topic $topic, array $parameters, $method='PUT', User $user) {
 		$form = $this->formFactory->create(new TopicTypeAPI(), $topic, array('method'=>$method));
 
 		$vocabIds = array();
@@ -78,6 +87,7 @@ class TopicHandler {
 		}
 
 		if ( $form->isValid()) {
+			$topic->setUser($user);
 			$this->om->persist($topic);
 			$this->om->flush();
 			return $topic;

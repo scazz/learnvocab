@@ -27,6 +27,22 @@ class User extends BaseUser
 	 */
 	protected $keys;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Subject", mappedBy="user")
+	 */
+	private $subjects;
+
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Topic", mappedBy="user")
+	 */
+	private $topics;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Vocab", mappedBy="user")
+	 */
+	private $vocabs;
+
     /**
      * Get id
      *
@@ -40,6 +56,5 @@ class User extends BaseUser
 	public function getKeys() {
 		return $this->keys;
 	}
-
 
 }

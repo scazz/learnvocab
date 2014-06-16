@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class VocabRepository extends EntityRepository
 {
+	public function findAllByUser(User $user) {
+		$q = $this->createQueryBuilder('v');
+		$q->where('v.user = :user')
+		  ->setParameter('user', $user);
+
+		return $q->getQuery()->getResult();
+	}
+
+	public function findAllByUserAndIds(User $user, array $ids) {
+		$q = $this->createQueryBuilder('v')
+			->where('v.user = :user')
+			->andWhere('v.id in (:ids)')
+			->setParameter('user', $user)
+			->setParameter('ids', $ids);
+
+		return $q->getQuery()->getResult();
+	}
 }

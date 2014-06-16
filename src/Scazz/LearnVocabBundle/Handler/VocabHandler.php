@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Scazz\LearnVocabBundle\Form\VocabTypeAPI;
 use Scazz\LearnVocabBundle\Entity\Vocab;
 use Scazz\LearnVocabBundle\Exception\InvalidFormException;
+use Scazz\LearnVocabBundle\Entity\User;
 
 
 class VocabHandler {
@@ -20,27 +21,36 @@ class VocabHandler {
 		$this->formFactory = $formFactory;
 	}
 
-	public function get($id)
+	public function get($id, User $user=null)
 	{
-		return $this->repository->find($id);
+		$vocab = $this->repository->find($id);
+
+		if (is_object($vocab->getUser()) &&
+			is_object($user) &&
+			$vocab->getUser()->getId() != $user->getId()) {
+			throw new AccessDeniedException("You do not have permission to view this resource");
+		}
+		return $vocab;
 	}
 
-	public function getAll($ids = array()) {
+	public function getAll($ids = array(), User $user) {
 		if (empty($ids)) {
-			$vocabs = $this->repository->findAll();
+			$vocabs = $this->repository->findAllByUser($user);
 		} else {
-			$vocabs = $this->repository->findById( $ids );
+			$vocabs = $this->repository->findAllByUserAndIds( $user, $ids );
 		}
 		return $vocabs;
 	}
 
-	public function post(Request $request) {
+	public function post(Request $request, User $user) {
 		$vocab = new Vocab();
-		return $this->processForm($vocab, $request->request->all()['vocab'], 'POST');
+		$params = $request->request->all()['vocab'];
+		return $this->processForm($vocab, $params, 'POST', $user);
 	}
 
-	public function put(Request $request, Vocab $vocab) {
-		return $this->processForm($vocab, $request->request->all()['vocab'], 'PUT');
+	public function put(Request $request, Vocab $vocab, User $user) {
+		$params = $request->request->all()['vocab'];
+		return $this->processForm($vocab, $params, 'PUT', $user);
 	}
 
 	public function delete(Vocab $vocab) {
@@ -48,7 +58,7 @@ class VocabHandler {
 		$this->om->flush();
 	}
 
-	private function processForm(Vocab $vocab, array $parameters, $method='PUT') {
+	private function processForm(Vocab $vocab, array $parameters, $method='PUT', User $user) {
 		/* Set default options */
 		if (! array_key_exists('timesCorrectlyAnswered', $parameters)) {
 			$parameters['timesCorrectlyAnswered'] = 0;
@@ -58,6 +68,7 @@ class VocabHandler {
 		$form->submit($parameters);
 
 		if ( $form->isValid()) {
+			$vocab->setUser($user);
 			$this->om->persist($vocab);
 			$this->om->flush();
 			return $vocab;

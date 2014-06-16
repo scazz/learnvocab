@@ -3,6 +3,7 @@
 namespace Scazz\LearnVocabBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Scazz\LearnVocabBundle\Entity\User;
 
 /**
  * SubjectRepository
@@ -12,4 +13,40 @@ use Doctrine\ORM\EntityRepository;
  */
 class SubjectRepository extends EntityRepository
 {
+	public function findAllForUser(User $user) {
+		$q = $this->createQueryBuilder('s');
+
+		$q->where('s.user = :user')
+			->orWhere(
+				$q->expr()->andX(
+					's.user is null',
+					's.isTemplate = true'
+				)
+			)
+			->setParameter('user', $user);
+
+		return $q->getQuery()->getResult();
+	}
+
+	public function findForUserByIds(array $ids, User $user) {
+		$q = $this->createQueryBuilder('s');
+
+		$q->where(
+			$q->expr()->andX(
+				's.user = :user',
+				's.id IN (:ids)'
+			)
+		)->orWhere(
+				$q->expr()->andX(
+					's.user is null',
+					's.isTemplate = true',
+					's.id IN (:ids)'
+			)
+		)
+		->setParameter('user', $user)
+		->setParameter('ids', $ids);
+
+		return $q->getQuery()->getResult();
+
+	}
 }

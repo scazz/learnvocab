@@ -58,6 +58,13 @@ class Topic
 	 */
 	private $vocabs;
 
+	/**
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="subjects")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	 *
+	 */
+	private $user;
+
 	public function __construct() {
 		$this->vocabs = array();
 	}
@@ -169,5 +176,14 @@ class Topic
 			$ids[] = $vocab->getId();
 		}
 		return $ids;
+	}
+
+	public function getUser() {
+		return $this->user;
+	}
+
+	public function setUser(User $user) {
+		$this->user = $user;
+		return $this;
 	}
 }

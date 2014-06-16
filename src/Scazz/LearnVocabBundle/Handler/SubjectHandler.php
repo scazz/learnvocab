@@ -6,9 +6,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Scazz\LearnVocabBundle\Form\SubjectTypeAPI;
 use Scazz\LearnVocabBundle\Form\SubjectType;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Scazz\LearnVocabBundle\Entity\Subject;
 use Scazz\LearnVocabBundle\Exception\InvalidFormException;
+use Scazz\LearnVocabBundle\Entity\User;
 
 class SubjectHandler {
 
@@ -23,27 +25,35 @@ class SubjectHandler {
 		$this->topicHandler = $topicHandler;
 	}
 
-	public function get($id)
+	public function get($id, User $user)
 	{
-		return $this->repository->find($id);
+		$subject = $this->repository->find($id);
+		if ( is_object($subject->getUser())
+			&& is_object($user)
+			&& $user->getId() != $subject->getUser()->getId()) {
+				throw new \Symfony\Component\Security\Core\Exception\AccessDeniedException();
+		}
+		return $subject;
 	}
 
-	public function getAll($ids = array()) {
+	public function getAll($ids = array(), User $user) {
 		if (empty($ids)) {
-			$subjects = $this->repository->findAll();
+			$subjects = $this->repository->findAllForUser($user);
 		} else {
-			$subjects = $this->repository->findById($ids);
+			$subjects = $this->repository->findForUserByIds($ids, $user);
 		}
 		return $subjects;
 	}
 
-	public function post($request) {
+	public function post($request, User $user) {
 		$subject = new Subject();
-		return $this->processForm($subject, $request->request->all()['subject'], 'POST');
+		$params =  $request->request->all()['subject'];
+		return $this->processForm($subject,$params,'POST', $user);
 	}
 
-	public function put(Subject $subject, $request) {
-		return $this->processForm($subject, $request->request->all()['subject'], 'POST');
+	public function put(Subject $subject, $request, User $user) {
+		$params =  $request->request->all()['subject'];
+		return $this->processForm($subject, $params, 'POST', $user);
 	}
 
 	public function delete(Subject $subject) {
@@ -55,7 +65,7 @@ class SubjectHandler {
 		$this->om->flush();
 	}
 
-	private function processForm(Subject $subject, array $parameters, $method='PUT') {
+	private function processForm(Subject $subject, array $parameters, $method='PUT', User $user) {
 		$form = $this->formFactory->create(new SubjectTypeAPI(), $subject, array('method'=>$method));
 
 		$topicIds = array();
@@ -75,6 +85,7 @@ class SubjectHandler {
 		}
 
 		if ( $form->isValid()) {
+			$subject->setUser($user);
 			$this->om->persist($subject);
 			$this->om->flush();
 			return $subject;

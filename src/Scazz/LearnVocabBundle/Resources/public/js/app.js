@@ -71895,10 +71895,12 @@ App.TopicsController = Ember.ArrayController.extend({
 				});
 				var subjectController = this.get('controllers.subject');
 				var topics = subjectController.get('topics');
+                console.log("saved");
 				topic.save().then(function() {
+                        console.log("came back good!");
 						topics.pushObject(topic);
 						subjectController.get('model').save();
-				});
+				}, function() {console.log("failed");});
 				this.set('newTopicName', '');
 			}
 		},

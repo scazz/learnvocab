@@ -10,11 +10,16 @@ use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 
+use Scazz\LearnVocabBundle\Entity\User;
 use Scazz\LearnVocabBundle\Exception\InvalidFormException;
 
 
 class TopicController extends FOSRestController {
+	private $user;
 
+	private function setup() {
+		$this->user = $this->get('security.context')->getToken()->getUser();
+	}
 
 	/**
 	 * @param ParamFetcher $paramFetcher
@@ -23,17 +28,18 @@ class TopicController extends FOSRestController {
 	 * @QueryParam(array=true, name="ids", requirements="\d+", description="List of ids")
 	 */
 	public function getTopicsAction(ParamFetcher $paramFetcher) {
-
+		$this->setup();
 		$ids = $paramFetcher->get('ids');
 
 		$data = $this->container
 			->get('learnvocab.topic.handler')
-			->getAll($ids);
+			->getAll($this->user,$ids);
 
 		return array( 'topics' => $data );
 	}
 
 	public function getTopicAction($id) {
+		$this->setup();
 		$view = View::create();
 
 		$data = $this->getOr404($id);
@@ -42,11 +48,12 @@ class TopicController extends FOSRestController {
 	}
 
 	public function postTopicAction(Request $request) {
+		$this->setup();
 		try {
 			$newTopic = $this
 				->container
 				->get('learnvocab.topic.handler')
-				->post( $request );
+				->post( $request, $this->user );
 
 		} catch(InvalidFormException $exception) {
 			return $exception->getForm();
@@ -57,12 +64,13 @@ class TopicController extends FOSRestController {
 	}
 
 	public function putTopicAction(Request $request, $id) {
+		$this->setup();
 		$topic = $this->getOr404($id);
 		try {
 			$this
 				->container
 				->get('learnvocab.topic.handler')
-				->put( $request, $topic );
+				->put( $request, $topic, $this->user );
 		} catch(InvalidFormException $exception) {
 			return $exception->getForm();
 		}
@@ -72,6 +80,7 @@ class TopicController extends FOSRestController {
 	}
 
 	public function deleteTopicAction($id) {
+		$this->setup();
 		$topic = $this->getOr404($id);
 		$this->container->get('learnvocab.topic.handler')->delete($topic);
 		return new View(null, 204);
@@ -87,13 +96,12 @@ class TopicController extends FOSRestController {
 	 * @throws NotFoundHttpException
 	 */
 	protected function getOr404($id) {
-		if (!($topic = $this->container->get('learnvocab.topic.handler')->get($id))) {
+		if (!($topic = $this->container->get('learnvocab.topic.handler')->get($id, $this->user))) {
+			echo "not found!";
 			throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.',$id));
 		}
 
 		return $topic;
 	}
-
-
 
 }
