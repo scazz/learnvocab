@@ -71616,10 +71616,14 @@ App.Router.map(function() {
 
 App.ApplicationRoute = Ember.Route.extend({
   actions: {
-  //  error: function () {
-  //    this.transitionTo('application-error', "application-error");
-  //  }
-  }
+		error: function(reason, transition) {
+			if (reason.status === 403) {
+				this.transitionTo("login");
+			} else {
+				this.transitionTo("application-error");
+			}
+		}
+	}
 });
 
 App.LoginRoute = Ember.Route.extend({
@@ -71785,18 +71789,7 @@ App.SubjectsRoute = Ember.Route.extend({
 	setupController: function(controller, model) {
         controller.set('model', model);
         controller.set('templates', this.store.find('subjecttemplate'));
-    },
-
-	actions: {
-		error: function(reason, transition) {
-			if (reason.status === 403) {
-				console.log("not properly logged in!");	
-				this.transitionTo("login");
-			} else {
-				return true; //bubble up
-			}
-		}
-	}
+    }
 });
 
 
@@ -72159,10 +72152,8 @@ App.TopicTestController = Ember.ObjectController.extend({
 App.NewVocabWordView = Ember.TextField.extend({
   classNameBindings: ['valid::has-error'],
 });
-
 Ember.Handlebars.helper('new-vocab-word', App.NewVocabWordView);
 
-// todo: move hideModel to "leaving" code
 App.DialogWindowComponent = Ember.Component.extend({
 	didInsertElement: function() {
 		console.log("firing insert code!");
@@ -72221,7 +72212,7 @@ App.VocabTestComponent = Ember.Component.extend({
 
 
 App.TouchableIcon = Ember.Component.extend({
-	/* hard code list of accepted actions */ //TODO: clean....
+	/* hard code list of accepted actions */ 
 	toggleQAVisibilitySetting: 'toggleQAVisibilitySetting',
 	toggleQAVisibility: 'toggleQAVisibility',
 	incorrect: 'incorrect',
@@ -72245,12 +72236,6 @@ Ember.Handlebars.helper('touchable-icon', App.TouchableIcon);
 
 
 /* models */
-/*
-DS.RESTAdapter.reopen({
-  namespace: 'api/v1'
-
-  //headers: {"token": "YAY"}
-}); */
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
 	headers: function() { 
