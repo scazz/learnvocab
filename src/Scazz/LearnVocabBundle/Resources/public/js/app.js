@@ -71917,6 +71917,7 @@ App.TopicsController = Ember.ArrayController.extend({
 					'Accept' : 'application/json'
 				},
 				success: function(response) {
+					templateTopic.deleteRecord();
 					var topics = subjectController.get('topics');
 					_self.store.find('topic', response.topic.id).then(function(topic) { 
 						topics.pushObject(topic);
