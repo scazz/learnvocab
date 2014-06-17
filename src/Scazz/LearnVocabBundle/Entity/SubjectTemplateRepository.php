@@ -3,6 +3,8 @@
 namespace Scazz\LearnVocabBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr;
+
 
 /**
  * SubjectTemplateRepository
@@ -12,4 +14,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class SubjectTemplateRepository extends EntityRepository
 {
+	public function findAllUnusedTemplates() {
+		$q = $this->createQueryBuilder('st');
+
+		$q->select('st');
+		$q->leftJoin('ScazzLearnVocabBundle:Subject', 's', Expr\Join::WITH, $q->expr()->eq('st.name','s.name'));
+		$q->where('s.id is null');
+		return $q->getQuery()->getResult();
+	}
 }

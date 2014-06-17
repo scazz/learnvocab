@@ -28,7 +28,8 @@ class SubjectTemplateController extends FOSRestController {
 	}
 
 	public function cgetAction() {
-		$data = $this->getDoctrine()->getManager()->getRepository('ScazzLearnVocabBundle:SubjectTemplate')->findAll();
+		$repository = $this->getDoctrine()->getManager()->getRepository('ScazzLearnVocabBundle:SubjectTemplate');
+		$data = $repository->findAllUnusedTemplates();
 		return array('subjecttemplates' => $data);
 	}
 
