@@ -70915,7 +70915,9 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push("\r\n\r\n  ");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n</div>\r\n");
+  data.buffer.push("\r\n</div>\r\n\r\n");
+  data.buffer.push(escapeExpression((helper = helpers.outlet || (depth0 && depth0.outlet),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "loading", options) : helperMissing.call(depth0, "outlet", "loading", options))));
+  data.buffer.push("\r\n");
   return buffer;
   
 });
@@ -71057,6 +71059,16 @@ function program1(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n</ul>\r\n");
   return buffer;
+  
+});
+
+Ember.TEMPLATES["loading"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  
+
+
+  data.buffer.push("<div style=\"position: absolute; width:100%; height:100%; top: 0; left: 0; background-color:rgba(240,240,240,0.5);\">\r\n	<div style=\"position:fixed; top: 50%; left: 50%; background-color: rgba(240,240,240,1)\">\r\n		<i class=\"fa fa-spinner fa-spin fa-3x\"></i>\r\n	</div>\r\n</div>\r\n");
   
 });
 
@@ -71305,16 +71317,25 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
+  var buffer = '', stack1;
+  data.buffer.push("\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Select your subject </strong>\r\n    </div>\r\n\r\n    ");
+  stack1 = helpers.each.call(depth0, {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[],types:[],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  </div>\r\n</div>\r\n");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
   var buffer = '', stack1, helper, options;
   data.buffer.push("\r\n	    <div class=\"list-group-item\">\r\n	      ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "topics", "", options) : helperMissing.call(depth0, "link-to", "topics", "", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "topics", "", options) : helperMissing.call(depth0, "link-to", "topics", "", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n	      <button type=\"button\" class=\"padded-button btn btn-danger pull-right trash\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteSubjectWithConfirmation", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push("><i class=\"fa fa-trash-o\"></i></button>\r\n	    </div>\r\n 	  ");
   return buffer;
   }
-function program2(depth0,data) {
+function program3(depth0,data) {
   
   var stack1;
   stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
@@ -71322,7 +71343,16 @@ function program2(depth0,data) {
   else { data.buffer.push(''); }
   }
 
-function program4(depth0,data) {
+function program5(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n    ");
+  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n </div>\r\n</div>\r\n");
+  return buffer;
+  }
+function program6(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\r\n      <div class=\"list-group-item\">\r\n        <a ");
@@ -71336,13 +71366,12 @@ function program4(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Select your subject </strong>\r\n    </div>\r\n\r\n    ");
-  stack1 = helpers.each.call(depth0, {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],data:data});
+  stack1 = helpers['if'].call(depth0, "model", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n    ");
-  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\r\n\r\n");
+  stack1 = helpers['if'].call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Create a new subject </strong>\r\n    </div>\r\n    <div class=\"list-group-item\">\r\n      ");
+  data.buffer.push("\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Create a new subject </strong>\r\n    </div>\r\n    <div class=\"list-group-item\">\r\n      ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'action': ("createNewSubject"),
     'class': ("subject"),
@@ -71409,16 +71438,25 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
+  var buffer = '', stack1;
+  data.buffer.push("\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Select your topic </strong>\r\n    </div>\r\n\r\n    ");
+  stack1 = helpers.each.call(depth0, {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[],types:[],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  </div>\r\n</div>\r\n");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
   var buffer = '', stack1, helper, options;
   data.buffer.push("\r\n	    <div class=\"list-group-item\">\r\n	      ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "vocabs", "", options) : helperMissing.call(depth0, "link-to", "vocabs", "", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "vocabs", "", options) : helperMissing.call(depth0, "link-to", "vocabs", "", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n	      <button type=\"button\" class=\"padded-button btn btn-danger pull-right trash\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteTopicWithConfirmation", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(" ><i class=\"fa fa-trash-o\"></i></button>\r\n	    </div>\r\n 	");
   return buffer;
   }
-function program2(depth0,data) {
+function program3(depth0,data) {
   
   var stack1;
   stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
@@ -71426,7 +71464,16 @@ function program2(depth0,data) {
   else { data.buffer.push(''); }
   }
 
-function program4(depth0,data) {
+function program5(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n     ");
+  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n </div>\r\n</div>\r\n");
+  return buffer;
+  }
+function program6(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\r\n      <div class=\"list-group-item\" ");
@@ -71440,13 +71487,12 @@ function program4(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Select your topic </strong>\r\n    </div>\r\n\r\n    ");
-  stack1 = helpers.each.call(depth0, {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],data:data});
+  stack1 = helpers['if'].call(depth0, "model", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n     ");
-  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\r\n\r\n");
+  stack1 = helpers['if'].call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Create a new topic </strong>\r\n    </div>\r\n    <div class=\"list-group-item\">\r\n      ");
+  data.buffer.push("\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Create a new topic </strong>\r\n    </div>\r\n    <div class=\"list-group-item\">\r\n      ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'action': ("createNewTopic"),
     'class': ("topic"),
@@ -71614,6 +71660,15 @@ App.Router.map(function() {
 	this.route('application-error', {path: '/*wildcard'});
 }); 
 
+App.LoadingRoute = Ember.Route.extend({
+	renderTemplate: function() {
+		this.render('loading', {
+			outlet: 'loading',
+			into: 'application'
+		});
+	}
+});
+
 App.ApplicationRoute = Ember.Route.extend({
   actions: {
 		error: function(reason, transition) {
@@ -71623,6 +71678,10 @@ App.ApplicationRoute = Ember.Route.extend({
 				this.transitionTo("application-error");
 			}
 		}
+
+	/*	loading: function() {
+			console.log("loading...!");
+		}*/
 	}
 });
 
