@@ -26,6 +26,13 @@ learnvocab_api_User:
      resource: "Scazz\\LearnVocabBundle\Controller\UserController"
      name_prefix:  api_1_
 
+learnvocab_api_SubjectTemplate:
+     type:     rest
+     prefix:   /api/v1
+     defaults: {_format: json}
+     resource: "Scazz\\LearnVocabBundle\Controller\SubjectTemplateController"
+     name_prefix:  api_1_
+
 learnvocab_site:
     resource:  "Scazz\\LearnVocabBundle\Controller\SiteController"
     type:     annotation

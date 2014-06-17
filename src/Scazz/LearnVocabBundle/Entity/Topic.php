@@ -38,20 +38,19 @@ class Topic
      */
     private $name;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="isTemplate", type="boolean")
-	 * @Expose
-     */
-    private $isTemplate;
-
 	/**
 	 * @ORM\ManyToOne(targetEntity="Subject", inversedBy="topics")
 	 * @ORM\JoinColumn(name="subject_id", referencedColumnName="id")
 	 *
 	 */
 	private $subject;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="templateSubjectName", type="string", length=255, nullable=true)
+	 */
+	private $templateSubjectName;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Vocab", mappedBy="topic")
@@ -116,29 +115,6 @@ class Topic
         return $this->name;
     }
 
-    /**
-     * Set isTemplate
-     *
-     * @param boolean $isTemplate
-     * @return Topic
-     */
-    public function setIsTemplate($isTemplate)
-    {
-        $this->isTemplate = $isTemplate;
-
-        return $this;
-    }
-
-    /**
-     * Get isTemplate
-     *
-     * @return boolean 
-     */
-    public function getIsTemplate()
-    {
-        return $this->isTemplate;
-    }
-
 	public function getVocabs() {
 		return $this->vocabs;
 	}
@@ -184,6 +160,14 @@ class Topic
 
 	public function setUser(User $user) {
 		$this->user = $user;
+		return $this;
+	}
+
+	public function getTemplateSubjectName() {
+		return $this->templateSubjectName;
+	}
+	public function setTemplateSubjectName($name) {
+		$this->templateSubjectName = $name;
 		return $this;
 	}
 }

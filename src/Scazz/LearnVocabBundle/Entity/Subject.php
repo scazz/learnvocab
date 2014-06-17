@@ -40,15 +40,6 @@ class Subject
      */
     private $name;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="isTemplate", type="boolean")
-	 * @Expose
-	 * @SerializedName("isTemplate")
-     */
-    private $isTemplate;
-
 	/**
 	 * @ORM\OneToMany(targetEntity="Topic", mappedBy="subject")
 	 */
@@ -146,29 +137,6 @@ class Subject
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set isTemplate
-     *
-     * @param boolean $isTemplate
-     * @return Subject
-     */
-    public function setIsTemplate($isTemplate)
-    {
-        $this->isTemplate = $isTemplate;
-
-        return $this;
-    }
-
-    /**
-     * Get isTemplate
-     *
-     * @return \boolean" 
-     */
-    public function getIsTemplate()
-    {
-        return $this->isTemplate;
     }
 
 	public function getUser() {

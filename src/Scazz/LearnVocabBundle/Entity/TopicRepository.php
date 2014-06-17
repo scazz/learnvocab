@@ -17,13 +17,7 @@ class TopicRepository extends EntityRepository
 	public function findAllByUser(User $user) {
 		$q = $this->createQueryBuilder('t');
 		$q->where('t.user = :user')
-			->orWhere(
-				$q->expr()->andX(
-					't.user is null',
-					't.isTemplate = true'
-				)
-			)
-			->setParameter('user', $user);
+		  ->setParameter('user', $user);
 
 		return $q->getQuery()->getResult();
 	}
@@ -36,13 +30,7 @@ class TopicRepository extends EntityRepository
 				't.user = :user',
 				't.id IN (:ids)'
 			)
-		)->orWhere(
-				$q->expr()->andX(
-					't.user is null',
-					't.isTemplate = true',
-					't.id IN (:ids)'
-				)
-			)
+		)
 			->setParameter('user', $user)
 			->setParameter('ids', $ids);
 

@@ -16,7 +16,6 @@ class TopicType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('isTemplate')
 			->add('vocabs')
         ;
     }

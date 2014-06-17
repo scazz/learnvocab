@@ -25,6 +25,17 @@ class SubjectHandler {
 		$this->topicHandler = $topicHandler;
 	}
 
+	public function cloneSubject(Subject $templateSubject, User $user) {
+		$subject = new Subject();
+		$subject->setUser($user);
+		$subject->setIsTemplate(false);
+		$subject->setTopics( new ArrayCollection() );
+		$subject->setName( $templateSubject->getName());
+		$this->om->persist($subject);
+		$this->om->flush();
+		return $subject;
+	}
+
 	public function get($id, User $user)
 	{
 		$subject = $this->repository->find($id);

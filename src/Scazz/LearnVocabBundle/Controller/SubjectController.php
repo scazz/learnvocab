@@ -2,6 +2,7 @@
 
 namespace Scazz\LearnVocabBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
@@ -22,17 +23,6 @@ class SubjectController extends FOSRestController {
 		$this->user = $this->get('security.context')->getToken()->getUser();
 	}
 
-	/**
-	 * @param $id
-	 */
-	public function cloneSubjectAction( $id ) {
-		$this->setup();
-		$subject = $this->getOr404($id);
-
-
-
-		return array($subject->getName());
-	}
 
 	public function getSubjectAction( $id ) {
 		$this->setup();

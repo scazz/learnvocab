@@ -7,6 +7,8 @@ use Scazz\LearnVocabBundle\Entity\Topic;
 use Scazz\LearnVocabBundle\Form\TopicTypeAPI;
 use Scazz\LearnVocabBundle\Exception\InvalidFormException;
 use Scazz\LearnVocabBundle\Entity\User;
+use Scazz\LearnVocabBundle\Entity\Subject;
+use Scazz\LearnVocabBundle\Entity\Vocab;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
@@ -64,6 +66,34 @@ class TopicHandler {
 
 		$this->om->remove($topic);
 		$this->om->flush();
+	}
+
+	public function findTopicsForTemplate($name) {
+		return $this->repository->findBy(array('templateSubjectName' => $name));
+	}
+
+	public function cloneTopic(Topic $templateTopic, User $user, Subject $subject) {
+		$topic = new Topic();
+		$topic->setUser($user);
+		$topic->setName( $templateTopic->getName() );
+		$topic->setSubject($subject);
+
+		$this->om->persist($topic);
+		$this->om->flush();
+
+		/** @var Vocab $vocab */
+		foreach($templateTopic->getVocabs() as $vocab) {
+			$newVocab = new Vocab();
+			$newVocab->setNative( $vocab->getNative() );
+			$newVocab->setTranslated( $vocab->getTranslated() );
+			$newVocab->setUser($user);
+			$newVocab->setTopic($topic);
+			$newVocab->setIsLearnt(false);
+			$newVocab->setTimesCorrectlyAnswered(0);
+			$this->om->persist($newVocab);
+		}
+		$this->om->flush();
+		return $topic;
 	}
 
 	private function processForm(Topic $topic, array $parameters, $method='PUT', User $user) {

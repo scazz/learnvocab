@@ -17,12 +17,6 @@ class SubjectRepository extends EntityRepository
 		$q = $this->createQueryBuilder('s');
 
 		$q->where('s.user = :user')
-			->orWhere(
-				$q->expr()->andX(
-					's.user is null',
-					's.isTemplate = true'
-				)
-			)
 			->setParameter('user', $user);
 
 		return $q->getQuery()->getResult();
@@ -35,12 +29,6 @@ class SubjectRepository extends EntityRepository
 			$q->expr()->andX(
 				's.user = :user',
 				's.id IN (:ids)'
-			)
-		)->orWhere(
-				$q->expr()->andX(
-					's.user is null',
-					's.isTemplate = true',
-					's.id IN (:ids)'
 			)
 		)
 		->setParameter('user', $user)

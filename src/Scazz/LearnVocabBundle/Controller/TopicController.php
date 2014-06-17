@@ -9,6 +9,7 @@ use FOS\RestBundle\View\View;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\Annotations\Get;
 
 use Scazz\LearnVocabBundle\Entity\User;
 use Scazz\LearnVocabBundle\Exception\InvalidFormException;
@@ -84,6 +85,33 @@ class TopicController extends FOSRestController {
 		$topic = $this->getOr404($id);
 		$this->container->get('learnvocab.topic.handler')->delete($topic);
 		return new View(null, 204);
+	}
+
+	/**
+	 * @Get("/topictemplates")
+	 * @QueryParam(name="subjectName", description="Subject name")
+	 */
+	public function getTopicTemplatesAction(ParamFetcher $paramFetcher) {
+		$name = $paramFetcher->get("subjectName");
+		$data = $this->container->get('learnvocab.topic.handler')->findTopicsForTemplate($name);
+		return array('topictemplates'=>$data);
+	}
+
+	/**
+	 *
+	 * @QueryParam(name="subject_id", description="Subject ID to clone topic into")
+	 */
+	public function getTopicCloneAction($id, ParamFetcher $paramFetcher) {
+		$this->setup();
+		$topic = $this->getOr404($id);
+
+		if ( is_object($topic->getSubject())) {
+			$targetSubject = $topic->getSubject();
+		} else {
+			$targetSubject = $this->container->get('learnvocab.subject.handler')->get( $paramFetcher->get('subject_id'), $this->user );
+		}
+		$topic = $this->container->get('learnvocab.topic.handler')->cloneTopic($topic, $this->user, $targetSubject);
+		return array('topic'=>$topic);
 	}
 
 	/**

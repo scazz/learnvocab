@@ -70920,16 +70920,6 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
-Ember.TEMPLATES["application_error"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  
-
-
-  data.buffer.push("hello error\r\n\r\n");
-  
-});
-
 Ember.TEMPLATES["components/dialog-window"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -70982,13 +70972,38 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
-Ember.TEMPLATES["error"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["ff/subjectTemplate"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '';
+
+
+  return buffer;
   
+});
 
+Ember.TEMPLATES["ff/subjectTemplates"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var stack1, escapeExpression=this.escapeExpression, self=this;
 
-  data.buffer.push("hello error\r\n\r\n");
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n	<div class=\"list-group-item\">\r\n		<a ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateSubject", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</a>\r\n		<button type=\"button\" class=\"padded-button btn btn-success pull-right trash\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateSubject", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push("><i class=\"fa fa-play\"></i></button>\r\n</div>\r\n");
+  return buffer;
+  }
+
+  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  else { data.buffer.push(''); }
   
 });
 
@@ -71296,7 +71311,7 @@ function program1(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n	      <button type=\"button\" class=\"padded-button btn btn-danger pull-right trash\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteSubjectWithConfirmation", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push("><i class=\"fa fa-trash-o\"></i></button>\r\n	    </div>\r\n 	");
+  data.buffer.push("><i class=\"fa fa-trash-o\"></i></button>\r\n	    </div>\r\n 	  ");
   return buffer;
   }
 function program2(depth0,data) {
@@ -71310,21 +71325,21 @@ function program2(depth0,data) {
 function program4(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n     	<div class=\"list-group-item\">\r\n	      <a ");
+  data.buffer.push("\r\n      <div class=\"list-group-item\">\r\n        <a ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateSubject", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(">");
   stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</a>\r\n	      <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\" ");
+  data.buffer.push("</a>\r\n        <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateSubject", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push("><i class=\"fa fa-play\"></i></button>\r\n	    </div>\r\n     ");
+  data.buffer.push("><i class=\"fa fa-play\"></i></button>\r\n      </div>\r\n    ");
   return buffer;
   }
 
   data.buffer.push("<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Select your subject </strong>\r\n    </div>\r\n\r\n    ");
-  stack1 = helpers.each.call(depth0, "custom", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n     ");
+  data.buffer.push("\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n    ");
   stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Create a new subject </strong>\r\n    </div>\r\n    <div class=\"list-group-item\">\r\n      ");
@@ -71413,18 +71428,20 @@ function program2(depth0,data) {
 
 function program4(depth0,data) {
   
-  var buffer = '', stack1, helper, options;
-  data.buffer.push("\r\n      <div class=\"list-group-item\">\r\n        ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "topics", "", options) : helperMissing.call(depth0, "link-to", "topics", "", options));
+  var buffer = '', stack1;
+  data.buffer.push("\r\n      <div class=\"list-group-item\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateTopic", "", {hash:{
+    'on': ("click")
+  },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">\r\n        ");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n        <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateTopic", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push("><i class=\"fa fa-play\"></i></button>\r\n      </div>\r\n     ");
+  data.buffer.push("\r\n        <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\"><i class=\"fa fa-play\"></i></button>\r\n      </div>\r\n     ");
   return buffer;
   }
 
   data.buffer.push("<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Select your topic </strong>\r\n    </div>\r\n\r\n    ");
-  stack1 = helpers.each.call(depth0, "custom", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n     ");
   stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
@@ -71599,12 +71616,9 @@ App.Router.map(function() {
 
 App.ApplicationRoute = Ember.Route.extend({
   actions: {
-    error: function () {
-      this.transitionTo('application-error', "application-error");
-    }
-  },
-  beforeModel: function() {
-  //	this.transitionTo('subjects');
+  //  error: function () {
+  //    this.transitionTo('application-error', "application-error");
+  //  }
   }
 });
 
@@ -71735,7 +71749,7 @@ App.ApplicationController = Ember.ObjectController.extend({
 	availableSubjects: function(){
 		//if (this.get('currentPath').indexOf('subject') > -1) {
 		if (this.get("session.isLoggedIn")) {
-			var subjects = this.get('controllers.subjects.custom');
+			var subjects = this.get('controllers.subjects');
 			return subjects.get('firstObject') !== undefined ? subjects : this.store.find('subject');
 		}
    }.property('session.authToken'),
@@ -71755,36 +71769,23 @@ App.ApplicationController = Ember.ObjectController.extend({
 			} 
 		}
 		return false;
-	}.property('currentPath', 'controllers.topic.vocabs')
+	}.property('currentPath', 'controllers.topic.vocabs') 
 });
 
 
 App.NavigationController = Ember.ArrayController.extend({
-	needs: ['subjects', 'subject', 'topic'],
-	 
-	selectedSubject: '',
-	selectedTopic: '',
-	// will do until we extend the router! 
-	availableSubjects: function() {
-		return this.get("controllers.subjects.custom");//.filterBy('isTemplate', false);
-	}.property(),
 
-//	availableTopics: function() {
-//		return this.get("controllers.subject.topics");
-//	}.property("controllers.subject.topics"),
-
-	availableVocabs: function() {
-		if (this.get('controllers.topic.vocabs')) {
-			return true;
-		} return false;
-	}.property('controllers.topic.vocabs')
 });
-
 
 App.SubjectsRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.find('subject');
 	},
+
+	setupController: function(controller, model) {
+        controller.set('model', model);
+        controller.set('templates', this.store.find('subjecttemplate'));
+    },
 
 	actions: {
 		error: function(reason, transition) {
@@ -71809,9 +71810,22 @@ App.SubjectRoute = Ember.Route.extend({
 
 
 App.TopicsRoute = Ember.Route.extend({
+	templates: '',
 	model: function() {
-		return this.modelFor('subject').get('topics');
-	}
+		// find templates here to force ember to wait for the promise to resolve
+		var subjectName = this.modelFor('subject').get('name');
+		var self = this;
+
+		return self.store.find('topictemplate', {subjectName: subjectName}).then( function(topicTemplates) {
+			self.set('templates', topicTemplates);
+			return self.modelFor('subject').get('topics');
+		});
+	},
+
+	setupController: function(controller, model) {	
+        controller.set('model', model);
+       controller.set('templates', this.templates);
+    },
 });
 
 App.TopicRoute = Ember.Route.extend({
@@ -71826,19 +71840,11 @@ App.VocabsRoute = Ember.Route.extend({
 	}
 });
 
-
 App.SubjectController = Ember.ObjectController.extend({});
 
 App.SubjectsController = Ember.ArrayController.extend({
 	newSubjectName: '',
-
-	templates: function() {
-		return this.filterBy('isTemplate', true);
-	}.property('@each.isTemplate'),
-
-	custom: function() {
-		return this.filterBy('isTemplate', false);
-	}.property('@each.isTemplate'),
+	templates: '',
 
 	actions: {
 		createNewSubject: function() {
@@ -71855,8 +71861,16 @@ App.SubjectsController = Ember.ArrayController.extend({
 
 		cloneTemplateSubject: function(templateSubject) {
 			var _self = this;
-			$.getJSON("/api/cloneSubject/" + templateSubject.get('id'), function(response) {
-				_self.get('model').update();
+			$.ajax({
+				url: "/api/v1/subjecttemplates/"+  templateSubject.get('id') + "/clone",
+				headers : {
+					'username': this.get("session.username"),
+					'token': this.get("session.authToken"),
+					'Accept' : 'application/json'
+				},
+				success: function() {
+					_self.get('model').update();
+				}
 			});
 		},
 
@@ -71870,14 +71884,6 @@ App.SubjectsController = Ember.ArrayController.extend({
 App.TopicsController = Ember.ArrayController.extend({
 	needs: ['subject', 'subjects'],
 	newTopicName: '',
-
-	templates: function() {
-		return this.filterBy('isTemplate', true);
-	}.property('@each.isTemplate'),
-
-	custom: function() {
-		return this.filterBy('isTemplate', false);
-	}.property('@each', '@each.isTemplate'),
 
 	deleteTopic: function(topic) {
 		var subjectController = this.get("controllers.subject");
@@ -71895,38 +71901,34 @@ App.TopicsController = Ember.ArrayController.extend({
 				});
 				var subjectController = this.get('controllers.subject');
 				var topics = subjectController.get('topics');
-                console.log("saved");
 				topic.save().then(function() {
-                        console.log("came back good!");
 						topics.pushObject(topic);
 						subjectController.get('model').save();
-				}, function() {console.log("failed");});
+				});
 				this.set('newTopicName', '');
 			}
 		},
 
 		cloneTemplateTopic: function(templateTopic) {
-			console.log("why are i not here");
 			var _self = this;
+			var subjectController = this.get('controllers.subject');
+			var subject_id = subjectController.get('id');
 
-			$.getJSON("/api/cloneTopic/" + templateTopic.get('id'), function(response) {
-				var subjectController = _self.get('controllers.subject');
-				var topics = subjectController.get('topics');
-				_self.store.find('topic', response.topic.id).then(function(topic) { 
-					topics.pushObject(topic);
-				});
+			$.ajax({
+				url: "/api/v1/topics/" + templateTopic.get('id') + "/clone?subject_id="+subject_id, 
+				headers: {
+					'username': this.get("session.username"),
+					'token': this.get("session.authToken"),
+					'Accept' : 'application/json'
+				},
+				success: function(response) {
+					var topics = subjectController.get('topics');
+					_self.store.find('topic', response.topic.id).then(function(topic) { 
+						topics.pushObject(topic);
+					});
+				}
 			});
 
-
-		//	$.getJSON("/api/cloneTopic/" + templateTopic.get('id'), function(response) {
-				//_self.get('controllers.subject').get('model').reload();
-		//		console.log( _self.get('model').toString());
-		//		_self.get('model').update();
-				//_self.get('controllers.subject').get('model').reload();
-
-		//		console.log("OK");
-				//
-		//	});
 		},
 
 		deleteTopicWithConfirmation: function(topic) {
@@ -72261,16 +72263,23 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 	namespace: 'api/v1'
 });
 
+App.Subjecttemplate = DS.Model.extend({
+	name: DS.attr()
+}); //TODO: delete
+
+
+App.Topictemplate = DS.Model.extend({
+	name: DS.attr(), 
+	subjectName: DS.attr()
+}); 
 
 App.Subject = DS.Model.extend({
 	name: DS.attr(), 
-	isTemplate: DS.attr('boolean'),
 	topics: DS.hasMany('topic', {async: true})
 });
 
 App.Topic = DS.Model.extend({
 	name: DS.attr(),
-	isTemplate: DS.attr('boolean'),
 	vocabs: DS.hasMany('vocab', {async: true})
 });
 
