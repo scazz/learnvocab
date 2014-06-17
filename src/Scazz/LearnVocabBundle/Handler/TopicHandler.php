@@ -68,8 +68,8 @@ class TopicHandler {
 		$this->om->flush();
 	}
 
-	public function findTopicsForTemplate($name) {
-		return $this->repository->findBy(array('templateSubjectName' => $name));
+	public function findUnusedTopicsForTemplate($name, User $user) {
+		return $this->repository->findUnusedTopicsByTemplateSubjectName( $name, $user);
 	}
 
 	public function cloneTopic(Topic $templateTopic, User $user, Subject $subject) {

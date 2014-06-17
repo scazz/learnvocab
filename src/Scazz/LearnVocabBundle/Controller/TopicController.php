@@ -92,8 +92,9 @@ class TopicController extends FOSRestController {
 	 * @QueryParam(name="subjectName", description="Subject name")
 	 */
 	public function getTopicTemplatesAction(ParamFetcher $paramFetcher) {
+		$this->setup();
 		$name = $paramFetcher->get("subjectName");
-		$data = $this->container->get('learnvocab.topic.handler')->findTopicsForTemplate($name);
+		$data = ($this->container->get('learnvocab.topic.handler')->findUnusedTopicsForTemplate($name, $this->user) ?: array());
 		return array('topictemplates'=>$data);
 	}
 

@@ -3,6 +3,8 @@
 namespace Scazz\LearnVocabBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr;
+
 
 /**
  * TopicRepository
@@ -35,5 +37,28 @@ class TopicRepository extends EntityRepository
 			->setParameter('ids', $ids);
 
 		return $q->getQuery()->getResult();
+	}
+
+	public function findUnusedTopicsByTemplateSubjectName($templateSubjectName, User $user) {
+
+		/* tt == TopicTemplate
+		   tc == TopicCustom */
+		$q = $this->createQueryBuilder('tt');
+
+		$joinCondition =
+			$q->expr()->andx(
+				$q->expr()->eq('tt.name', 'tc.name'),
+				$q->expr()->eq('tc.user', ':user')
+			);
+
+
+		$q->select('tt');
+		$q->leftJoin('ScazzLearnVocabBundle:Topic', 'tc', Expr\Join::WITH, $joinCondition );
+		$q->where('tt.templateSubjectName = :template_subject_name');
+		$q->andWhere('tc.id is null');
+		$q->setParameter('user', $user);
+		$q->setParameter('template_subject_name', $templateSubjectName);
+		return $q->getQuery()->getResult();
+
 	}
 }

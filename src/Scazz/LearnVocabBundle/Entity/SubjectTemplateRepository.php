@@ -14,12 +14,19 @@ use Doctrine\ORM\Query\Expr;
  */
 class SubjectTemplateRepository extends EntityRepository
 {
-	public function findAllUnusedTemplates() {
+	public function findAllUnusedTemplatesForUser(User $user) {
 		$q = $this->createQueryBuilder('st');
 
+		$joinCondition =
+			$q->expr()->andx(
+				$q->expr()->eq('st.name', 's.name'),
+				$q->expr()->eq('s.user', ':user')
+			);
+
 		$q->select('st');
-		$q->leftJoin('ScazzLearnVocabBundle:Subject', 's', Expr\Join::WITH, $q->expr()->eq('st.name','s.name'));
+		$q->leftJoin('ScazzLearnVocabBundle:Subject', 's', Expr\Join::WITH, $joinCondition );
 		$q->where('s.id is null');
+		$q->setParameter('user', $user);
 		return $q->getQuery()->getResult();
 	}
 }
