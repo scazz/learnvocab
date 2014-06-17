@@ -71862,7 +71862,9 @@ App.SubjectsController = Ember.ArrayController.extend({
 					'Accept' : 'application/json'
 				},
 				success: function() {
+					templateSubject.deleteRecord();
 					_self.get('model').update();
+
 				}
 			});
 		},
