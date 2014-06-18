@@ -70937,6 +70937,48 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
+Ember.TEMPLATES["components/list-row"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1;
+
+
+  data.buffer.push("<div class=\"listrow list-group-item\">\r\n	");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n	 <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\"><i class=\"fa fa-trash\"></i></button>\r\n</div>");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["components/template-row"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1;
+
+
+  data.buffer.push("<div class=\"listrow list-group-item\">\r\n	");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n	 <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\"><i class=\"fa fa-play\"></i></button>\r\n</div>");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["components/touchable-div"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1;
+
+
+  data.buffer.push("<div class=\"listrow list-group-item\">\r\n	");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n	<button type=\"button\" class=\"padded-button btn btn-success pull-right trash\" ><i class=\"fa fa-play\"></i></button>\r\n</div>");
+  return buffer;
+  
+});
+
 Ember.TEMPLATES["components/vocab-test"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -71031,10 +71073,10 @@ function program2(depth0,data) {
   data.buffer.push("Register now!");
   }
 
-  data.buffer.push("<div class=\"jumbotron\">\r\n	<h1> Welcome to LearnVocab.net </h1>\r\n\r\n	<p>Free site geared to help you boost your vocab for a forign language:\r\n		<ul>\r\n			<li> Works great on mobile platforms </li>\r\n			<li> Smart testing - focuses on words you regularly get wrong </li>\r\n			<li> Prepopulated vocab lists - learn the vocab you're interested in </li>\r\n			<li> Specific words you need to know? No problem, create a custom list or add the word to one of your prepopulated lists </li>\r\n			<li> And loads more! </li>\r\n		</ul> \r\n	</p>\r\n\r\n	<p>You can get started by logging in for free with facebook, or creating your own account</p>\r\n	<p>\r\n		");
+  data.buffer.push("<div class=\"jumbotron\">\r\n	<h1> Welcome to LearnVocab.net </h1>\r\n\r\n	<p>A free app to test and guide you as you learn:\r\n		<ul>\r\n			<li> Learn on the go - works great on mobile platforms </li>\r\n			<li> Learn smart – LearnVocab knows when you’ve learned a word and stops testing you </li>\r\n			<li> Learn fast – LearnVocab has loads of word lists available for you to use instantly</li>\r\n			<li> Learn the vocab you’re interested in – create your own word lists, or edit some of ours </li>\r\n			<li> [Coming soon] Learn as a team – if you’re learning a language with a friend, or in a class you can share your lists for others to work with </li>\r\n			<li> Hate typing in answers to questions? Us too! You know if you know a word or not. Simply tap the thumbs up or thumbs down to let LearnVocab know what you know</li>\r\n			<li> And lots more great features</li>\r\n		</ul> \r\n	</p>\r\n\r\n	<p>Get started for free by creating an account, or signing in with facebook [Coming soon]</p>\r\n	<p style=\"text-align: center\">\r\n		");
   stack1 = helpers.unless.call(depth0, "session.isLoggedIn", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n		</p>\r\n</div>");
+  data.buffer.push("\r\n		</p>\r\n</div>\r\n\r\n<div id=\"footer\">\r\n      <div class=\"container\">\r\n      	<img src=\"logos/symfony.png\">\r\n      	<img src=\"logos/ember.png\">\r\n        <p class=\"text-muted\">Place sticky footer content here.</p>\r\n      </div>\r\n</div>");
   return buffer;
   
 });
@@ -71075,44 +71117,52 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["login"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n	<div class=\"alert alert-error\">");
+  data.buffer.push("\r\n	<div class=\"alert alert-danger\">");
   stack1 = helpers._triageMustache.call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</div>\r\n");
   return buffer;
   }
 
-  data.buffer.push("<form class=\"form-inline\" ");
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("\r\n	<div class=\"alert spacer\">&nbsp;</div>\r\n");
+  }
+
+  data.buffer.push("<form class=\"form-signin\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "login", {hash:{
     'on': ("submit")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push("> \r\n	");
+  data.buffer.push("> \r\n");
+  stack1 = helpers['if'].call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n\r\n\r\n	");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'value': ("username"),
+    'class': ("form-control"),
     'placeholder': ("Username")
-  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  },hashTypes:{'type': "STRING",'value': "ID",'class': "STRING",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\r\n	");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("password"),
     'value': ("password"),
+    'class': ("form-control"),
     'placeholder': ("Password")
-  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  },hashTypes:{'type': "STRING",'value': "ID",'class': "STRING",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\r\n	");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("submit"),
     'value': ("Login"),
-    'class': ("btn-small")
+    'class': ("btn btn-lg btn-primary btn-block")
   },hashTypes:{'type': "STRING",'value': "STRING",'class': "STRING"},hashContexts:{'type': depth0,'value': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\r\n</form>\r\n\r\n");
-  stack1 = helpers['if'].call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n");
+  data.buffer.push("\r\n</form>\r\n\r\n\r\n");
   return buffer;
   
 });
@@ -71255,14 +71305,14 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n	<div class=\"alert alert-error\">");
+  data.buffer.push("\r\n	<div class=\"alert alert-danger\">");
   stack1 = helpers._triageMustache.call(depth0, "errorMessage", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</div>\r\n");
   return buffer;
   }
 
-  data.buffer.push("<form class=\"form-inline\" ");
+  data.buffer.push("<form class=\"form-register\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "register", {hash:{
     'on': ("submit")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
@@ -71270,24 +71320,27 @@ function program1(depth0,data) {
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("email"),
     'value': ("email"),
-    'placeholder': ("Email address")
-  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'placeholder': ("Email address"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING",'class': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\r\n");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("text"),
     'value': ("username"),
-    'placeholder': ("Username")
-  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'placeholder': ("Username"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING",'class': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\r\n");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("password"),
     'value': ("password"),
-    'placeholder': ("Password")
-  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+    'placeholder': ("Password"),
+    'class': ("form-control")
+  },hashTypes:{'type': "STRING",'value': "ID",'placeholder': "STRING",'class': "STRING"},hashContexts:{'type': depth0,'value': depth0,'placeholder': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\r\n");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("submit"),
-    'class': ("btn-small"),
+    'class': ("btn btn-lg btn-primary btn-block"),
     'value': ("Register")
   },hashTypes:{'type': "STRING",'class': "STRING",'value': "STRING"},hashContexts:{'type': depth0,'class': depth0,'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\r\n\r\n</form>\r\n\r\n");
@@ -71313,7 +71366,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["subjects"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -71326,50 +71379,55 @@ function program1(depth0,data) {
   }
 function program2(depth0,data) {
   
-  var buffer = '', stack1, helper, options;
-  data.buffer.push("\r\n	    <div class=\"list-group-item\">\r\n	      ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "topics", "", options) : helperMissing.call(depth0, "link-to", "topics", "", options));
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n	      <button type=\"button\" class=\"padded-button btn btn-danger pull-right trash\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteSubjectWithConfirmation", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push("><i class=\"fa fa-trash-o\"></i></button>\r\n	    </div>\r\n 	  ");
-  return buffer;
-  }
-function program3(depth0,data) {
-  
-  var stack1;
+  var buffer = '', stack1;
+  data.buffer.push("\r\n      <div class=\"listrow list-group-item\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "transitionToTopics", "", {hash:{
+    'on': ("click")
+  },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">\r\n       ");
   stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  else { data.buffer.push(''); }
+  data.buffer.push("\r\n        <button type=\"button\" class=\"padded-button btn btn-danger pull-right trash\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteSubjectWithConfirmation", "", {hash:{
+    'bubbles': (false)
+  },hashTypes:{'bubbles': "BOOLEAN"},hashContexts:{'bubbles': depth0},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push("><i class=\"fa fa-trash-o\"></i></button>\r\n      </div>    \r\n 	  ");
+  return buffer;
   }
 
+function program4(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n  <div class=\"col-md-12\">\r\n    <div class=\"list-group\">\r\n      <div class=\"list-group-item\">\r\n        <strong>Choose from our pre-populated lists</strong>\r\n      </div>\r\n\r\n      ");
+  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n   </div>\r\n  </div>\r\n");
+  return buffer;
+  }
 function program5(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n    ");
-  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n </div>\r\n</div>\r\n");
-  return buffer;
-  }
-function program6(depth0,data) {
-  
-  var buffer = '', stack1;
-  data.buffer.push("\r\n      <div class=\"list-group-item\">\r\n        <a ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateSubject", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push(">");
+  data.buffer.push("\r\n        <div class=\"listrow list-group-item\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateSubject", "", {hash:{
+    'on': ("click")
+  },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">\r\n          ");
   stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</a>\r\n        <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateSubject", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push("><i class=\"fa fa-play\"></i></button>\r\n      </div>\r\n    ");
+  data.buffer.push("\r\n          <button type=\"button\" class=\"padded-button btn btn-success pull-right trash\"><i class=\"fa fa-play\"></i></button>\r\n        </div>\r\n      ");
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = '';
   return buffer;
   }
 
   stack1 = helpers['if'].call(depth0, "model", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n\r\n");
-  stack1 = helpers['if'].call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Create a new subject </strong>\r\n    </div>\r\n    <div class=\"list-group-item\">\r\n      ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
@@ -71384,6 +71442,10 @@ function program6(depth0,data) {
   data.buffer.push("\r\n");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n\r\n ");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "topics", "", options) : helperMissing.call(depth0, "link-to", "topics", "", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n");
   return buffer;
   
 });
@@ -71434,7 +71496,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["topics"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -71447,36 +71509,35 @@ function program1(depth0,data) {
   }
 function program2(depth0,data) {
   
-  var buffer = '', stack1, helper, options;
-  data.buffer.push("\r\n	    <div class=\"list-group-item\">\r\n	      ");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "vocabs", "", options) : helperMissing.call(depth0, "link-to", "vocabs", "", options));
+  var buffer = '', stack1;
+  data.buffer.push("\r\n	    <div class=\"listrow list-group-item\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "transitionToVocabs", "", {hash:{
+    'on': ("click")
+  },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(">\r\n	     ");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n	      <button type=\"button\" class=\"padded-button btn btn-danger pull-right trash\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteTopicWithConfirmation", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteTopicWithConfirmation", "", {hash:{
+    'bubbles': (false)
+  },hashTypes:{'bubbles': "BOOLEAN"},hashContexts:{'bubbles': depth0},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(" ><i class=\"fa fa-trash-o\"></i></button>\r\n	    </div>\r\n 	");
   return buffer;
   }
-function program3(depth0,data) {
-  
-  var stack1;
-  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  else { data.buffer.push(''); }
-  }
 
-function program5(depth0,data) {
+function program4(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong>Choose from our pre-populated lists</strong>\r\n    </div>\r\n\r\n     ");
-  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.each.call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n </div>\r\n</div>\r\n");
   return buffer;
   }
-function program6(depth0,data) {
+function program5(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n      <div class=\"list-group-item\" ");
+  data.buffer.push("\r\n      <div class=\"listrow list-group-item\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "cloneTemplateTopic", "", {hash:{
     'on': ("click")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
@@ -71490,7 +71551,7 @@ function program6(depth0,data) {
   stack1 = helpers['if'].call(depth0, "model", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n\r\n");
-  stack1 = helpers['if'].call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "templates", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n\r\n<div class=\"col-md-12\">\r\n  <div class=\"list-group\">\r\n    <div class=\"list-group-item\">\r\n      <strong> Create a new topic </strong>\r\n    </div>\r\n    <div class=\"list-group-item\">\r\n      ");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
@@ -71608,7 +71669,9 @@ App = Ember.Application.create({
 		this.register('session:current', App.Session, {singleton: true});
 		this.inject('adapter', 'session', 'session:current');
 		this.inject('controller', 'session', 'session:current');
-	}
+	},
+
+	customEvents: {touchend: "click"}
 });
 
 App.Session = Em.Object.extend({
@@ -71759,6 +71822,9 @@ App.LogoutRoute = Ember.Route.extend({
 App.LogoutController = Ember.ObjectController.extend ({
 	logout: function() {
 		this.set("session.authToken", "");
+		Ember.$.ajax({
+			url: "/api/deletetoken"
+		});
 		this.transitionToRoute("home");
 	}
 });
@@ -71928,6 +71994,10 @@ App.SubjectsController = Ember.ArrayController.extend({
 			});
 		},
 
+		transitionToTopics: function(subject) {
+			this.transitionToRoute('topics', subject);
+		},
+
 		deleteSubjectWithConfirmation: function(subject) {
 			this.transitionToRoute('subjects.delete', subject);
 		}
@@ -71984,6 +72054,10 @@ App.TopicsController = Ember.ArrayController.extend({
 				}
 			});
 
+		},
+
+		transitionToVocabs: function(topic) {
+			this.transitionToRoute('vocabs', topic);
 		},
 
 		deleteTopicWithConfirmation: function(topic) {
@@ -72294,7 +72368,14 @@ App.TouchableIcon = Ember.Component.extend({
 Ember.Handlebars.helper('touchable-icon', App.TouchableIcon);
 
 
+App.ListRow = Ember.Component.extend({
+	click: function() {
+		console.log("clicked");
+	}
 
+	
+});
+//Ember.Handlebars.helper('list-row', App.ListRow);
 
 
 /* models */
