@@ -71934,15 +71934,20 @@ App.TopicsRoute = Ember.Route.extend({
 		var subjectName = this.modelFor('subject').get('name');
 		var self = this;
 
-		return self.store.find('topictemplate', {subjectName: subjectName}).then( function(topicTemplates) {
-			self.set('templates', topicTemplates);
-			return self.modelFor('subject').get('topics');
+		return Ember.RSVP.hash({
+			topics: self.modelFor('subject').get('topics'),
+			templates: self.store.find('topictemplate', {subjectName: subjectName})
 		});
+
+	//	return self.store.find('topictemplate', {subjectName: subjectName}).then( function(topicTemplates) {
+	//		self.set('templates', topicTemplates);
+	//		return self.modelFor('subject').get('topics');
+	//	});
 	},
 
 	setupController: function(controller, model) {	
-        controller.set('model', model);
-       controller.set('templates', this.templates);
+       controller.set('model', model.topics);
+       controller.set('templates', model.templates);
     },
 });
 
