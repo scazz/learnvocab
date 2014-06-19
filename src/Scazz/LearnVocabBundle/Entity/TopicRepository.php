@@ -41,24 +41,30 @@ class TopicRepository extends EntityRepository
 
 	public function findUnusedTopicsByTemplateSubjectName($templateSubjectName, User $user) {
 
-		/* tt == TopicTemplate
-		   tc == TopicCustom */
 		$q = $this->createQueryBuilder('tt');
-
-		$joinCondition =
-			$q->expr()->andx(
-				$q->expr()->eq('tt.name', 'tc.name'),
-				$q->expr()->eq('tc.user', ':user')
-			);
-
-
 		$q->select('tt');
-		$q->leftJoin('ScazzLearnVocabBundle:Topic', 'tc', Expr\Join::WITH, $joinCondition );
 		$q->where('tt.templateSubjectName = :template_subject_name');
-		$q->andWhere('tc.id is null');
+		$q->setParameter('template_subject_name', $templateSubjectName);
+		$matchingTemplates =  $q->getQuery()->getResult();
+
+		$passedTemplates = array();
+		$q = $this->createQueryBuilder('tt');
+		$q	->select('tt')
+			->join('ScazzLearnVocabBundle:Subject', 's', Expr\Join::WITH, $q->expr()->eq('s', 'tt.subject') )
+			->where('tt.user = :user')
+			->andWhere('tt.name = :topicName')
+			->andWhere('s.name = :template_subject_name');
 		$q->setParameter('user', $user);
 		$q->setParameter('template_subject_name', $templateSubjectName);
-		return $q->getQuery()->getResult();
+
+		foreach ($matchingTemplates as $template) {
+			$q->setParameter('topicName', $template->getName() );
+			if (!  count($q->getQuery()->getResult() )) {
+				$passedTemplates[] = $template;
+			}
+		}
+
+		return $passedTemplates;
 
 	}
 }
