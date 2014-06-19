@@ -4,6 +4,8 @@
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
-/web/*
+/web/assets/
+/web/css/
+/web/js/
 .idea/
 /bin
